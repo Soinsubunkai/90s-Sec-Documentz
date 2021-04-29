@@ -1,0 +1,387 @@
+/*
+ * Win‚ð256”{Šy‚µ‚Þ–{i‚ ‚Ô‚È‚¢ƒtƒ@ƒCƒ‹•Òj
+ *
+ */
+
+‘æ‚VÍ  Win ‚Ì•sŽv‹c‚Èƒtƒ@ƒCƒ‹‚½‚¿
+
+‚ ‚Ô‚È‚¢ƒtƒ@ƒCƒ‹‚Æ‚¢‚Á‚Ä‚àw@r3z ‚Å‚Í‚ ‚è‚Ü‚¹‚ñB–{‰Æu‚¨Žq—lv‚Å‚àŽw“E‚µ‚Ä‚¢‚é‚æ
+‚¤‚ÉCr@ck ‚­‚ç‚¢‚ÍŽ©•ª‚Ås‚¤‚×‚«‚Å‚·B‚±‚±‚Å‚Ì•sŽv‹c‚Èƒtƒ@ƒCƒ‹‚Æ‚ÍA•MŽÒ‚É‚àŽg‚¢
+•û‚ª‚í‚©‚ç‚È‚¢‚à‚Ì‚Å‚·B‚»‚±‚ÅAˆê‰ž‚¨Œˆ‚Ü‚è‚ÌŒ¾‚¢“¦‚êA‚¢‚âuŒxv‚ð‘‚¢‚Ä‚¨‚«
+‚Ü‚·B
+
+y–ÆÓz
+‚±‚ê‚ç‚Ìƒtƒ@ƒCƒ‹‚ÍŒ¤‹†‚ ‚é‚¢‚Í‹³ˆç‚ª–Ú“I‚Å‚ ‚é‚Æ—‰ð‚µ‚Ü‚·B‚±‚ê‚ç‚Ìƒtƒ@ƒCƒ‹‚Í•K
+—v‚È“¹‹ï‚Æ‚µ‚Ä‹Ÿ‹‹‚³‚ê‚é‚à‚Ì‚Å‚ ‚èAˆá–@‚ÈŽg‚¢•û‚ð‹–‚·‚à‚Ì‚Å‚Í‚ ‚è‚Ü‚¹‚ñB‚±‚ê‚ç
+‚ÌŽg‚¢•ûAs“®‚É‚Â‚¢‚Ä‚Í‚·‚×‚Ä‚ ‚È‚½‚ÉÓ”C‚ª‚ ‚è‚Ü‚·B
+
+=========================================
+
+‚³‚ÄA‰SŽÒ‚Ìˆæ‚ð’E‚µ‚Ä‚»‚ë‚»‚ë–ó‚Ì•ª‚©‚ç‚È‚¢ƒtƒ@ƒCƒ‹‚ðW‚ßŽn‚ß‚½ƒAƒiƒ^BWin/DO
+S ‚É‚à‚¢‚ë‚ñ‚ÈŽg‚¢•û‚ª‚ ‚é‚í‚¢A‚ÆŽv‚Á‚Ä‚¢‚é‚±‚Æ‚Å‚µ‚å‚¤B“ú–{Œê‚Åà–¾‚Ì‚ ‚éƒtƒ@
+ƒCƒ‹‚È‚çA‚È‚ñ‚Æ‚È‚­‚Ç‚ñ‚ÈƒvƒƒOƒ‰ƒ€‚©„‘ª‚Å‚«‚é‚Å‚µ‚å‚¤‚ªA‰pŒê‚Å‚µ‚©‚àÚ‚µ‚¢à
+–¾‚ª‚È‚¢‚Æ—Ž‚Æ‚µ‚½Œã‚Å‚º‚ñ‚º‚ñˆá‚¤ƒtƒ@ƒCƒ‹‚¾‚Á‚½A‚Æ‚¢‚¤‚±‚Æ‚à‚ ‚é‚Å‚µ‚å‚¤B
+
+‚Å‚ÍAŠF‚³‚ñ‚ÌŽžŠÔ‚Ìß–ñ‚Ì‚½‚ßA—L–¼‚Ç‚±‚ë‚Ì‹@”\‚ðŠÈ’P‚Éà–¾‚µ‚Ü‚µ‚å‚¤B‚±‚ê‚Å‚ 
+‚â‚µ‚°‚Èƒtƒ@ƒCƒ‹‚Éo‰ï‚Á‚Ä‚à–³‘Ê‚Éƒ_ƒEƒ“ƒ[ƒh‚¹‚¸‚É‚·‚Þ..‚©‚ÈB
+
+88888888888888888888888
+      ƒ[ƒ‹ŠÖŒW
+88888888888888888888888
+
+1) Win95 Anonymail         Win95 “½–¼ƒ[ƒ‰[(•û–@‚Ítelnet•ÒŽQÆB‚»‚Ì’ö“x)
+2) Homicide_v1.0           ŽEl“½–¼ƒ[ƒ‹(Homicide anonymous emailer)‚Æ–¼‘O‚¾‚¯‚Í
+                           ‚·‚²‚¢‚ªŠ®‘S‚È“½–¼‚Å‚Í‚È‚¢BWin95—pB
+3) Kaboom_v3.0             ‚¨‚È‚¶‚Ý‚Ì Kaboom! ƒ[ƒ‹”š’eB Win95—pB
+                           ‚È‚º‚©ƒAƒCƒRƒ“‚É Frank Zappa‚ÌŠç‚ªŽg‚í‚ê‚Ä‚¢‚éB
+                           ƒ[ƒŠƒ“ƒOƒŠƒXƒg“o˜^‹@”\AFinger‹@”\‚àŽ‚ÂB
+4) Avalanch v3.0           u‚È‚¾‚êv‚Æ–½–¼‚³‚ê‚½ Kaboom!‚Ì‚R”{‘‚¢‚Æ‚¢‚¤ƒ[ƒ‹”š’eB
+                           ML‹@”\•t‚«Bƒ[ƒ‹ƒwƒbƒ_‚ÌŒë–‚‰»‚µ•û‚ª•’Ê‚¶‚á‚È‚¢Bˆ«Œû
+                           ƒWƒFƒlƒŒ[ƒ^[‚Í‚È‚©‚È‚©‚Ì”­‘zBƒJƒXƒ^ƒ}ƒCƒY‚Å‚«‚éB
+5) Unabomber_v1.0          ‚±‚ê‚à—L–¼‚Èƒ[ƒ‹ƒ{ƒ€BWin95—pB•MŽÒ‚ÍŽg‚Á‚½‚±‚Æ‚ª‚È‚¢B
+6) UpYours!_v3.0           ‚‹@”\ƒ[ƒ‹”š’eB‚¨‚Ü‚¯‹@”\‚É‚¨‚à‚µ‚ë‚¢‚à‚Ì‚ª‚ ‚éB
+                           ’P‘Ì‚Å‚Í“®‚©‚È‚¢(OCX‚ª•K—v) VB‚ðŽ‚Á‚Ä‚élŒü‚¯B
+7) Private_Idaho_v2.6b3    Windows—p PGP ƒ[ƒ‰[
+
+# ‚È‚¨A‚±‚ê‚ç‚Ìƒ[ƒ‰[‚Í“ú–{Œê‘Î‰ž‚µ‚Ä‚¢‚È‚¢B–³—–î—“ú–{Œê‚Å‘—‚é•û–@‚à‚È‚¢‚±‚Æ
+# ‚à‚È‚¢‚æ‚¤‚Å‚ ‚é‚ªA‚Ü‚ Bomb‚È‚ç‰pŒê‚Å‚à‚¢‚¢‚ñ‚Å‚µ‚åH
+
+“½–¼ƒ[ƒ‰[‚Æs‚Á‚Ä‚àu–{“–‚Ì“½–¼v‚Å‚Í‚È‚¢‚Ì‚Åˆ«‚¢Ž–‚Í‚µ‚È‚¢‚æ‚¤‚ÉB‚Ü‚½A•t‘®
+‚ÌSMTPƒŠƒXƒg‚ÍƒAƒe‚É‚È‚ç‚È‚¢‚Ì‚Å•K‚¸ŽÀŒ±‚µ‚Ä‚©‚çŒ™‚¢‚È“z‚ð”Y‚Ü‚¹‚é‚±‚ÆBƒŠƒXƒgƒT
+[ƒo[‚Ì“o˜^‚É‚à\•ª’ˆÓ‚·‚é‚±‚ÆB‚È‚¨A‚±‚ê‚ç‚Ìƒ[ƒ‰[‚Ås‚í‚ê‚éƒwƒbƒ_‚ÌŒë–‚‰»
+‚µ‚©‚½‚ÌŒ´—‚Ítelnet•Ò‚Åà–¾‚µ‚Ä‚¢‚éB‚»‚êˆÈã‚Ì‰ðÍ‚ÍŠeŽ©s‚Á‚Ä‚à‚ç‚¤‚Æ‚µ‚ÄA‚¨
+‚à‚µ‚ë‚¢Ž–‚ª‚í‚©‚Á‚½‚ç‚º‚Ð‚Æ‚àŒöŠJ‚µ‚Ä‚Ù‚µ‚¢B^^;
+
+88888888888888888888888
+      BBS ƒnƒbƒN
+88888888888888888888888
+‚ÆA‚¢‚Á‚Ä‚àInterNet‚ÌBBS ‚ðæ‚ÁŽæ‚é‚í‚¯‚Å‚Í‚È‚¢B‚¢‚í‚ä‚é‘‚ÌªBBS ‚Å‚·‚ÈBÚ×
+‚ÍÈ—ª(‚æ‚­’m‚ç‚È‚¢)
+
+1) Hacking_Renegade        Renegade BBS—p‚ç‚µ‚¢B
+2) Wild_Cat_v4.0           Wild Cat 4.0 BBS—p‚ç‚µ‚¢B
+
+88888888888888888888888
+      Game U—ª
+88888888888888888888888
+
+CHEAT v26.0                ƒQ[ƒ€‚ðéx‚·B 
+Cheat_Engine v2.5          EXE ‚Éƒpƒbƒ`‚ð‚ ‚Ä‚éB
+CRACKAID v3.39             ƒƒjƒ…[Œ`Ž®‚ÌƒvƒƒeƒNƒg‚Í‚¸‚µ
+CrackMaster v2.5           ƒQ[ƒ€‚ÌƒvƒƒeƒNƒg‚ÆƒpƒXƒ[ƒh‚Í‚¸‚µ
+HackFile v3.27             ƒQ[ƒ€‚ÌƒvƒƒpƒeƒB[‚ð•Ï‚¦‚é(ammo, lives ‚È‚Ç)
+NeverLock SPRING 95        ƒvƒƒeƒNƒg‚Í‚¸‚µ
+THE PATCHER v6.5           ƒRƒs[ƒvƒƒeƒNƒg‚ðŠO‚·
+Unlimited Cheats v3.0      ƒQ[ƒ€AƒXƒNƒŠ[ƒ“ƒZ[ƒo[‚È‚Ç‚ÉŒø‚­‚ç‚µ‚¢
+
+# ‚±‚Ì•Ó‚Í‚ ‚Ü‚èÚ‚µ‚­‚È‚¢B
+
+88888888888888888888888
+    ƒpƒXƒ[ƒhƒc[ƒ‹
+88888888888888888888888
+        
+1) AMI Bios Cracker        AMI BIOS ‚ÌƒpƒXƒ[ƒhƒNƒ‰ƒbƒN
+2) Award Bios Cracker      AWARD BIOS ‚ÌƒpƒXƒ[ƒhƒNƒ‰ƒbƒN
+3) Brute v1.1              Unix passwords ‚Ìƒuƒ‹[ƒgƒtƒH[ƒXEƒNƒ‰ƒbƒNB
+4) Cracker Jack v4.0       Å‚à—L–¼‚È Unix password ƒNƒ‰ƒbƒJ[ B
+                           PC—p(DOSƒ‚[ƒh‚Å“®ì)ìŽÒ‚ÍÅ‚à‚‘¬‚¾‚ÆŽ©–‚µ‚Ä‚¢‚éB
+                           ƒ[ƒhƒŠƒXƒg¶¬—pƒc[ƒ‹•t‚«B
+5) Glide                   Windows ‚ÌƒpƒXƒ[ƒhƒtƒ@ƒCƒ‹(.pwl)‚ÌƒNƒ‰ƒbƒNB
+6) Guess v2.1              Unix password ƒ`ƒFƒbƒJ[  DOS—pB
+7) Hades v1.00a            Unix password ƒnƒbƒNB
+8) Killer Cracker_v9.5     DOSƒ‚[ƒh‚ÌƒpƒXƒ[ƒhƒNƒ‰ƒbƒJ[(Ž«‘ƒ‚[ƒh) 
+9) Lard v2.0               Password ƒNƒ‰ƒbƒNƒXƒNƒŠƒvƒg
+10) New Hack v2.0          ƒpƒXƒ[ƒhƒtƒ@ƒCƒ‹‚ÌƒAƒbƒvƒf[ƒ^[ (OS/2,DOS—p)
+11) NTUPC v1.0             NT ƒpƒXƒ[ƒhƒNƒ‰ƒbƒJ[B
+12) PCUPC v2.01            Unix ƒpƒXƒ[ƒhƒNƒ‰ƒbƒJ[ (PC—p)
+13) PGPCrack v0.6b         PGP ˆÃ†ƒtƒ@ƒCƒ‹ƒNƒ‰ƒbƒJ[
+14) REMPASS_v2.6           BIOS ƒpƒXƒ[ƒh‚ðÁ‹Ž
+15) Star Cracker v0.3      Unix ƒpƒXƒ[ƒh ƒuƒ‹[ƒgƒtƒH[ƒXƒNƒ‰ƒbƒNBDOS—pB
+16) Trump-Hack v1.1        Trumpet Winsock ‚ÌƒpƒXƒ[ƒhƒNƒ‰ƒbƒN
+17) [XiT] v2.0             DOS—p Unix ƒpƒXƒ[ƒhƒNƒ‰ƒbƒJ[B
+18) John the Ripper v1.4   ‚â‚Í‚èAÅŒã‚Í‚±‚êBUnix password ƒNƒ‰ƒbƒJ[B
+                           Windows—pBDOS‘‹‚Å‚à“®‚­‚Ì‚Å•Ö—˜B‹­—Í‚Èsingle
+                           ƒ‚[ƒh‚Æ’PŒê‚ð•Ï‰»‚³‚¹‚é‹­—Í‚È‹@”\‚ª‚ ‚éBìŽÒ‚Í
+                           ‘“–‚½‚èƒ‚[ƒh(incremental)‚Å‚Íu‡—“I‚ÈŽžŠÔ“à
+                           ‚É‚ÍI‚í‚ç‚È‚¢v‚Æ‘‚¢‚Ä‚¢‚éB‚Ü‚½A486ˆÈã‚È‚ç
+                           Jack‚æ‚è‘‚¢‚Æ‚à‘‚¢‚Ä‚¢‚éB
+                           ƒIƒŠƒWƒiƒ‹ƒpƒbƒN‚Íƒ\[ƒXƒR[ƒh•t‚«B
+
+# ÅŒã‚ÌƒvƒƒOƒ‰ƒ€‚ðŽ‚Á‚Ä‚¢‚½‚çAƒŠƒ‚[ƒg‚Å‚ÌƒZƒLƒ…ƒŠƒeƒBŠÇ—‚Í–œ‘S‚Å‚µ‚å‚¤B
+# (ˆÓ–¡•s–¾^^;)
+
+
+88888888888888888888888
+    ƒvƒƒOƒ‰ƒ€U—ª
+88888888888888888888888
+
+1) Fast ZIP Cracker        zipƒtƒ@ƒCƒ‹(.zip)‚ÌƒpƒXƒ[ƒhƒNƒ‰ƒbƒJ[B
+2) MS Key Generator        Microsoft CD ƒL[EƒWƒFƒlƒŒ[ƒ^[B³‹Kƒ†[ƒU[‚Å‚à•Ö—˜B
+                           (“Æ‚èŒ¾F­‚µ‚ÍBorland‚ðŒ©K‚Á‚Ä‚Ù‚µ‚¢‚à‚ñ‚¾)
+3) Nag-Buster v1.2d        ƒVƒFƒAƒEƒFƒAEƒNƒ‰ƒbƒJ[BŽ×–‚‚Èƒ|ƒbƒvƒAƒbƒvƒEƒBƒ“ƒhƒEA
+                           ‰ñ”§ŒÀAŽŽ—pŠúŒÀ‚È‚Ç‚Ì‰ðœB   
+4) NoNag v2.0              shareware ‚ÌƒƒbƒN‚ð–³Œø‚É‚·‚éB
+5) ScreenCrack             ƒXƒNƒŠ[ƒ“ƒZ[ƒo[‚ÌƒpƒXƒ[ƒhƒNƒ‰ƒbƒJ[B
+6) WFWCD                   Word ‚ÌƒpƒXƒ[ƒhƒNƒ‰ƒbƒJ[BWindows—pB
+7) Zip Crack               PKZip ‚ÌƒpƒXƒ[ƒhƒNƒ‰ƒbƒJ[BìŽÒ‚ÍƒpƒXƒ[ƒh‚ð–Y‚ê‚½Žž
+                           ‚ÉŽg‚¤‚Æ‘‚¢‚Ä‚¢‚éB(hihihi)
+8) Datecrck                shareware ‚Ì—LŒøŠúŒÀ‚ð–³Œø‚É‚·‚éBŠúŒÀ•t‚«•]‰¿”Å‚È‚Ç‚É‚Í
+                           ŽŽ‚µ‚Ä‚Ý‚é‰¿’l‚ ‚èB
+
+88888888888888888888888
+     ‹tƒAƒZƒ“ƒuƒ‰
+88888888888888888888888
+
+1) The Bubble Chamber      ˆê”Ê“I‚È‹tƒAƒZƒ“ƒuƒ‰
+2) Disaster v1.0           ƒCƒ“ƒ^ƒ‰ƒNƒeƒBƒu‹tƒAƒZƒ“ƒuƒ‰
+3) HEdit 32 v1.2           HexƒGƒfƒBƒ^
+4) Hex Workshop v2.20      32-Bit hex ƒGƒfƒBƒ^
+5) Intelligent Disassembler‹tƒAƒZƒ“ƒuƒ‰
+6) SoftIce 95_v1.95b       Windows 95‹tƒAƒZƒ“ƒuƒ‰,ƒÀ”Å
+7) SoftIce DOS_v2.80       DOS”ÅƒCƒ“ƒ^[ƒtƒF[ƒX
+8) Windows Disassembler v1.7Windows ‹tƒAƒZƒ“ƒuƒ‰
+9) WSOCK32 v0.91           Winsock Spy
+
+# •MŽÒ‚ÍTurbo-Debugger‚à‚æ‚­Žg‚¤‚ªSoftIce‚Ì•û‚ªî•ñ‚ª(‚È‚ñ‚Ì‚¾?)W‚Ü‚è
+# ‚â‚·‚¢‚æ‚¤‚Å‚ ‚éB
+
+
+88888888888888888888888
+      ˆÃ† ƒc[ƒ‹
+88888888888888888888888
+‚ ‚Ü‚èŽg‚í‚È‚¢‚Å‚µ‚å‚¤‚©‚çA‚³‚ç‚è‚Æ‚¢‚«‚Ü‚·B
+
+1) Secret Sharer v1.1      ƒeƒLƒXƒgAƒoƒCƒiƒŠ‚ÌˆÃ†‰»ƒc[ƒ‹B
+2) Fast Encrypt v1.2       ˆÃ†‰»‚Ì•û–@‚ÍˆÙ‚È‚éBˆÈ‰º“¯—lB
+3) F.E.D. v1.1                        «
+4) Global Security v3.10
+5) HCE v1.5
+6) Scramble Plus
+7) KOH
+8) Mutation v1.00
+9) ParadoX v1.01                      ª
+10) Puffer v2.0            Email—pˆÃ†‰»ƒvƒƒOƒ‰ƒ€  Win95—pB
+11) Hide and Seek v4.1     GIF ƒtƒ@ƒCƒ‹‚Ì’†‚Éƒf[ƒ^‚ð‰B‚·B
+12) S-Tools v4.0           ŠeŽíƒtƒ@ƒCƒ‹‚Éƒf[ƒ^‚ð‰B‚·B
+13) Steganos v1.4          BMP, VOC, WAV ‚Ì’†‚Éƒtƒ@ƒCƒ‹‚ð‰B‚·B
+14) SecureDrive v1.3c      TSRí’“ƒvƒƒOƒ‰ƒ€B4‚Â‚Ìƒp[ƒeƒBƒVƒ‡ƒ“‚ ‚é‚¢‚Í
+                           2‚Â‚Ìƒtƒƒbƒs[‚Ü‚ÅŽg‚¢•ª‚¯‚é‚±‚Æ‚ª‚Å‚«‚éB
+15) CipherPak v2.0         DESˆÃ†‰»‚·‚éBWin95/Winx.xx—pB
+16) Wincrack               WinCrypt ‚ÅˆÃ†‰»‚³‚ê‚½ƒtƒ@ƒCƒ‹‚ÌƒNƒ‰ƒbƒNB
+
+88888888888888888888888
+        ‚»‚Ì‘¼
+88888888888888888888888
+
+1) BreakZip_v1.0           .zip ƒtƒ@ƒCƒ‹‚ð¬‚³‚Èƒtƒ@ƒCƒ‹‚É•ªŠ„‚·‚éB
+2) Chop_v3.1               ‘å‚«‚Èƒtƒ@ƒCƒ‹‚ð¬‚³‚Èƒtƒ@ƒCƒ‹‚É•ªŠ„‚·‚éB
+3) CNA_v2.1                Falken‹³Žö‚Ìì•iBCNA(Customer Name and Address)‚Ì
+                           –â‚¢‡‚í‚¹‚ðs‚¤ƒvƒƒOƒ‰ƒ€B
+4) FakeCD_v1.0             ƒn[ƒhƒfƒBƒbƒXƒN‚Å CD-ROM ‚ðƒVƒ~ƒ…ƒŒ[ƒg‚·‚éB‚Æ‚¢‚¤‚±‚Æ‚ÍDD
+5) KGB Utility             DOS‚Ìƒtƒ@ƒ“ƒNƒVƒ‡ƒ“ƒR[ƒ‹‚ðŠÄŽ‹‚·‚éí’“ƒvƒƒOƒ‰ƒ€B 
+                           Create File Handle       ;DOS function 3ch
+                           Open File Handle         ;DOS function 3dh
+                           Delete File              ;DOS function 41h
+                           Exec programm            ;DOS function 4bh
+                           Create New File          ;DOS function 5bh
+                           Find File                ;DOS function 4eh
+6) NoWhere Utilties        ‚¢‚í‚ä‚é–‹‚Ì“àŒn‚ÌƒpƒP[ƒWBCIPHER,DECRYPT, FAKEFILE
+                           (–¼‘O‚âƒTƒCƒY‚ð‹U‚Á‚½ƒtƒ@ƒCƒ‹ì‚è)‚È‚Ç–ñ10ŒÂ‚ªŠÜ‚Ü‚ê‚éB
+7) News You Can Use        –¢’²¸
+8) Pirate's Friend_v2.6    ƒVƒŠƒAƒ‹No.‚âCr@ck‚Ì•û–@‚ª‘‚©‚ê‚Ä‚¢‚éB
+                           ìŽÒ Puppet Master
+9) Registry monitor_v_2.0  ƒŒƒWƒXƒgƒŠ‚Ì•Ï‰»‚ð•\Ž¦‚·‚éB
+                           ƒŒƒWƒXƒgƒŠ‚ð‚¢‚¶‚éƒvƒƒOƒ‰ƒ€U—ª‚É‚Í•Ö—˜B
+
+# Registry Monitor ‚ÍŒ‹\•Ö—˜‚©‚àB
+
+88888888888888888888888
+      IRC ƒc[ƒ‹
+88888888888888888888888
+       
+1) IRC Mega Pak            mIRC—p‚Ì bot ƒXƒNƒŠƒvƒgW
+2) Atlantis_v1.1g          ircII 2.8+ —p IRC ƒXƒNƒŠƒvƒg
+3) Fire Fight_v1.8         mIRC—pƒXƒNƒŠƒvƒg (flood, op, deop ‚È‚Ç)
+4) Guardian_v2.2           mIRC 3.9+ —pƒXƒNƒŠƒvƒg
+5) Hellz Angel             •¡”‚ÌƒIƒvƒVƒ‡ƒ“‚ðŽ‚Â mIRC—pƒXƒNƒŠƒvƒg
+6) Kill_OP                 UŒ‚ƒXƒNƒŠƒvƒg
+7) Light_v1.0              mIRC INI ƒtƒ@ƒCƒ‹
+8) Make_A_Bot_v1.0         IRC Bots—p‚ÌŒöŽ®(!?)ƒKƒCƒh
+9) Nemezis                 IRC INI ƒtƒ@ƒCƒ‹
+10) NWA_v1.1 War Script    mIRC —p war ƒXƒNƒŠƒvƒg
+11) Riot_IRC_v1.0          IRC ƒXƒNƒŠƒvƒg
+12) Scythe_vC+             IRC war ƒXƒNƒŠƒvƒg
+13) SIN_v2.5               -=+SIN+=- mIRC ƒXƒNƒŠƒvƒg
+14) TextBox_v6.03          ‚‹@”\ IRC ƒXƒNƒŠƒvƒg
+15) VeveS_v1.25            mIRC—pƒXƒNƒŠƒvƒg
+16) X-Treme IRC_v4.3       32bit Hacked mIRC INI system
+17) Deathirc.zip           ÅV”Å‚Å‚ÍmIRC‚àˆê‚ÉƒpƒbƒP[ƒW‚³‚ê‚Ä‚¢‚é‚ª mIRC‚ð
+                           u“o˜^‚µ‚ëv‚Æ‚¤‚é‚³‚¢BCr@ck‚µ‚ÄŽg‚¢‚Ü‚µ‚å‚¤BmIRC
+                           ‚ÉƒXƒNƒŠƒvƒg‚ð‘g‚Ýž‚ñ‚Å‚ ‚èA‰EƒNƒŠƒbƒN‚ÅmIRC‚É‚Í
+                           –³‚¢—lX‚È‹@”\‚ªŒ»‚í‚ê‚éBMuhihiBìŽÒ‚ÍumIRC‚Í‚»‚ê
+                           ˆÈã‚Ì‰½•¨‚Å‚à‚È‚¢BŽ„‚Í‚»‚Ì‹@”\‚ðŠg’£‚µ‚½DDv‚È‚Ç
+                           ‚Æ‘‚¢‚Ä‚¢‚éB
+
+# ƒXƒNƒŠƒvƒg‚Ä‚È‚ÉHbot ‚Ä‚È‚ÉH‚Æ•·‚©‚ê‚Ä‚à“š‚¦‚æ‚¤‚ª‚È‚¢‚Å‚·B‚Í‚¢B“ú–{‚Å‚Í‚ 
+# ‚Ü‚è‚È‚¶‚Ý‚ª–³‚¢‚ªAŠO‘‚Ìƒ`ƒƒƒ“ƒlƒ‹‚Å‚Íˆê”Ê“I(!?)‚É‚Ç‚±‚©‚Ås‚í‚ê‚Ä‚¢‚éBŽg‚¢
+# •û‚ÍŽÀí‚ ‚é‚Ì‚Ý‚¾‚ÆŽv‚¤‚ªAPro ‚à‚¢‚é‚Ì‚Å•‰‚¯‚Ä‚à‰÷‚µ‚ª‚é‚±‚Æ‚Í‚È‚¢Bu‚È‚é‚Æ
+# –³‚µv(op ‚È‚µ) ‚Åƒnƒf‚É‚â‚Á‚Ä‚¢‚éƒ`ƒƒƒ“ƒlƒ‹‚ðŒ©‚Â‚¯‚½‚çA‚¨‚¨‚¢‚É–\‚ê‚Ü‚í‚Á‚Ä
+# ‚­‚ê‚¢B(portlistener ‚ÍON139 ‚­‚ç‚¢‚ÍŽç‚Á‚Äs‚±‚¤B‚»‚ê‚Å‚à‚½‚Ô‚ñŒ‚’Ä‚³‚ê‚é‚Æ
+# Žv‚¤‚¯‚Ç..)
+
+88888888888888888888888
+    ƒL[‹L˜^ ƒc[ƒ‹
+88888888888888888888888
+
+1) Key Copy_v1.01          DOS ƒx[ƒX‚ÌƒL[‹L˜^Bƒoƒbƒtƒ@‚Í200
+2) KeyLog Win3.11          ƒL[ƒXƒgƒ[ƒN‹L˜^  Windows 3.xx—p
+3) KeyLog Win95            ƒL[ƒXƒgƒ[ƒN‹L˜^  Windows 95—p
+4) Keytrap_v2.0            DOS—p‚ÌƒL[‹L˜^B‚ ‚Æ‚ÅASCII‚É•ÏŠ·‚Å‚«‚éƒtƒ@ƒCƒ‹‚É‹L˜^
+                           ‚·‚éBTSR‚Æ‚µ‚Äí’“‚·‚éB(Win—p‚Å‚Í‚È‚¢)
+5) Playback_v1.9c          Windows—pƒL[‹L˜^Bƒoƒbƒ`ƒtƒ@ƒCƒ‹‚ÅƒvƒŒƒCƒoƒbƒN‚·‚éB
+6) Phantom_v2.0            ƒL[ƒ{[ƒh‚ÌŒ¶‚Æ–½–¼‚³‚ê‚Ä‚¢‚é‚ªŽc”O‚È‚±‚Æ‚Éshareware‚Å‚ ‚éB
+                           ƒvƒŒƒCƒoƒbƒN‹@”\•t‚«B
+
+# ƒL[ƒXƒgƒ[ƒN‚ð‹L˜^‚µ‚Ä‚Ç‚¤‚·‚é‚ñ‚¾‚Æ•·‚©‚È‚¢‚æ‚¤‚ÉB
+# ‚½‚Ô‚ñAƒRƒ}ƒ“ƒhƒ‰ƒCƒ“‚Å‰½“x‚àƒRƒ“ƒpƒCƒ‹‚·‚é‚Æ‚«‚É•Ö—˜‚È‚ñ‚Å‚µ‚å‚¤B
+
+88888888888888888888888
+  ƒtƒŠ[ƒLƒ“ƒO ƒc[ƒ‹
+88888888888888888888888
+        
+1) Apex_v1.00              ‚³‚Ü‚´‚Ü‚È­•{‹@ŠÖ‚Ö‹U“d˜b‚ª‚Å‚«‚é‚ç‚µ‚¢B
+2) Box Tone_v1.00          Boxƒg[ƒ“‚ÌƒWƒFƒlƒŒ[ƒ^[
+3) CyberPHREAK_v1.0        Red Box,Blue Box‚È‚Ç‚Ìƒg[ƒ“ƒWƒFƒlƒŒ[ƒ^[B
+4) FearsPhreakTools        “¯ã
+5) Gunbelt_v3.0            ƒ‚ƒfƒ€‚ð‘€ì‚·‚éƒc[ƒ‹‚ç‚µ‚¢B
+6) PBX Scanner_v5.0        PBX‚ðscan‚·‚éƒI[ƒgƒ_ƒCƒ„ƒ‰[B
+7) Phreak Master_v1.0      Blue Box ƒGƒ~ƒ…ƒŒ[ƒ^[‘¼B
+8) Tone Generator_v2.0     ƒg[ƒ“ƒWƒFƒlƒŒ[ƒ^[B
+9) WinPhreak               Red ‚Æ Blue Box ‚ÌWindowsƒCƒ“ƒ^[ƒtƒF[ƒXB
+
+88888888888888888888888
+     S.I.N ƒc[ƒ‹
+88888888888888888888888
+
+1) AutoExecuted            ˆê”Ê•ÛŒìƒGƒ‰[‚ª‹N‚±‚Á‚½‚æ‚¤‚ÉŒ©‚¹‚©‚¯‚éB
+                           ‘ŠŽè‚ªƒAƒz‚È‚çéx‚³‚ê‚ÄÄ‹N“®‚·‚éB
+2) CD -X-                  ˆêŒ© CDƒvƒŒƒCƒ„[‚Ì‚æ‚¤‚¾‚ªAplayƒ{ƒ^ƒ“‚ð‰Ÿ‚·‚Æ
+                           ƒEƒBƒ‹ƒX‚ÉŠ´õ‚·‚éBˆ«Ž¿‚Å‚ ‚éB
+3) DCC_Newq                port19‚ÅDCC Chat‚ð‘—‚émIRC‚ÌƒoƒO‚ð—˜—p‚·‚éBmIC‚Ìv4.6ˆÈ~‚Å‚Í
+                           1024‚Ì‚ÝDCC‚ÉŽg‚¤‚Ì‚Å flood ‚ÌŒø‰Ê‚Í‚È‚¢B
+4) Faking Novell           Novell logon screen ‚Ì‹UŽÒ‚ð•\Ž¦‚µƒtƒ@ƒCƒ‹‚Éƒ†[ƒU[–¼‚Æ
+                           ƒpƒXƒ[ƒh‚ð‹L˜^‚·‚éB
+5) FakeDOSVirus_v.1996.35 
+                           ‚±‚ê‚Í‹°‚ë‚µ‚¢•ºŠíBCƒhƒ‰ƒCƒu‚Ìƒ‰ƒxƒ‹‚ðFakeDOS‚É•Ï‚¦A
+                           deltree ‚ð‚â‚Á‚Ä‚­‚ê‚éB‚»‚Ì‚¤‚¦ C:\ ‚ðƒNƒCƒbƒNƒtƒH[ƒ}ƒbƒg
+                           ‚µ‚ÄeØ‚É‚àSIN-DOS‚ðƒCƒ“ƒXƒg[ƒ‹‚µ‚Ä‚­‚ê‚éBƒCƒ“ƒXƒg[ƒ‹‚³
+                           ‚ê‚½command.com ‚ÍA‚à‚¿‚ë‚ñƒEƒBƒ‹ƒX‚Å‚ ‚éB
+6) HDKiller_v1.0           •¶Žš‚Ç‚¨‚èƒn[ƒhƒfƒBƒXƒNƒLƒ‰[‚Å‚ ‚éBƒlƒbƒgƒXƒP[ƒv‚ÌƒAƒh
+                           ƒIƒ“‚Ì‚æ‚¤‚ÈŠç‚ð‚µ‚Ä‚¢‚é‚ªAŽÀ‚Í C:\‚Ì‰B‚µƒtƒ@ƒCƒ‹‚ÉƒeƒLƒX
+                           ƒg‚ð‘—‚è‘±‚¯ƒn[ƒhƒfƒBƒXƒN‚ð‚ ‚Ó‚ê‚³‚¹‚éB
+7) PNewq_v0.97             Windows 95/NT—p‚ÌÅ‚à—D‚ê‚½ port”š’e‚Æà–¾‚³‚ê‚Ä‚¢‚éB
+8) Port Pro_v0.93          PNewq ‚Ìƒc[ƒ‹ƒvƒƒOƒ‰ƒ€BƒT[ƒo[‚Ìƒ|[ƒg‚ðƒXƒLƒƒƒ“‚µ‚ÄŒ‹‰Ê
+                           ‚ð•\Ž¦‚·‚éB‚±‚ê‚ð‚à‚Æ‚ÉA‚Ç‚Ìƒ|[ƒg‚É PNewq ‚Å bomb‚ð‘—‚é‚©
+                           Œˆ‚ß‚éB
+9) SIN_v2.5                mIRC —pƒXƒNƒŠƒvƒgWB
+10) V.Form.At              ƒn[ƒhƒfƒBƒXƒN‚ðƒtƒH[ƒ}ƒbƒg‚·‚éƒEƒBƒ‹ƒXB
+
+
+88888888888888888888888
+     ƒEƒBƒ‹ƒXŠÖŒW
+88888888888888888888888
+
+1) ANSIBomb Generator_v2.0 ANSI”š’e‚ÌƒWƒFƒlƒŒ[ƒ^[B
+2) Bizatch1                Å‰‚Ì Windows 95 ƒEƒBƒ‹ƒXB
+                           31“ú‚ÉŠ´õ‚µ‚½ exe ƒtƒ@ƒCƒ‹‚ªƒƒbƒZ[ƒW‚ð‚¾‚·B 
+3) Biological Warfare_v1.00×‹Ûí‘ˆ(Biological Warfare)‚ÆŒ¾‚¤‹°‚ë‚µ‚¢–¼‘O‚Ì
+                           ‚±‚ÌƒvƒƒOƒ‰ƒ€‚Í‚à‚¿‚ë‚ñƒEƒBƒ‹ƒXì¬ƒLƒbƒg‚¾B
+                           Œˆ‚ß‚½‹@”\‚ÌTurbo Assembler—p‚ÌƒEƒBƒ‹ƒXƒR[ƒh‚ð
+                           ì‚èo‚·BƒƒbƒN‚ð‚Æ‚­ƒpƒXƒ[ƒh‚Í freakB
+                           “Á’¥‚ÍA
+                           * COM & EXE ‚ÉŠ´õ
+                           * í’“ & ”ñí’† ƒEƒBƒ‹ƒX
+                           * ƒAƒ“ƒ`EƒgƒŒ[ƒXƒR[ƒh
+                           * INT 24 ƒnƒ“ƒhƒ‰
+                           * ƒfƒBƒŒƒNƒgƒŠ‰B‚µ
+                           * ˆÃ†‰»( Biological Warfare Mutation Engine‚É‚æ‚è)
+4) Virus Samples           Virus‚ÌƒTƒ“ƒvƒ‹WB
+5) IVP_v1.0                ŠÈ’PƒEƒBƒXƒXì¬ƒLƒbƒg‚Æ–¼‘O‚ª‚Â‚¢‚Ä‚¢‚éBìŽÒ‚Í YAMB
+                           “Á’¥
+                           * .EXE/.COM ƒtƒ@ƒCƒ‹‚ÉŠ´õB
+                           * ƒgƒƒC‚ðƒTƒ|[ƒgB
+                           * COMMAND.COM Š´õB
+                           * ã‘‚«ƒIƒvƒVƒ‡ƒ“
+                           * ƒ‰ƒ“ƒ_ƒ€ Nop ƒWƒFƒlƒŒ[ƒ^[
+                           * Ý’è—p‚ÌŠÈˆÕƒGƒfƒBƒ^
+                           * MTE ƒEƒBƒ‹ƒX‚Æ‚ÌŒÝŠ·«
+6) IVP_v2.0b               ã‹L‚ÌƒAƒbƒvƒo[ƒWƒ‡ƒ“
+                           “Á’¥
+                           * ƒR[ƒhƒWƒFƒlƒŒ[ƒ^[‚Ì Fix
+                           * Minimum/Maximum ƒtƒ@ƒCƒ‹ƒTƒCƒYƒ`ƒFƒbƒN
+                           * Š´õƒJƒEƒ“ƒ^
+                           * ƒ‰ƒ“ƒ_ƒ€ƒ|ƒCƒ“ƒ^
+                           * ƒRƒ“ƒpƒCƒ‹‚µ‚½ƒtƒ@ƒCƒ‹ƒTƒCƒY‚ÌŽw’èB
+                           * •\Ž¦—p•¶Žš—ñ
+                           ‚È‚Ç
+7) NRLG Virus Creator_v0.66b í’“Œ^ƒEƒBƒ‹ƒXì¬—pB
+8) Terror Virus            Œ©‚Â‚¯‚É‚­‚¢ƒEƒBƒ‹ƒX‚Ì—áBƒtƒ@ƒCƒ‹–¼‚ð terror.v
+                           ‚©‚ç terror.com ‚É•Ï‚¦‚é‚±‚ÆBŽÀs‚ÍŽ©•ª‚ÌƒŠƒXƒN
+                           ‚Ås‚¤‚±‚ÆB
+9) THCK_v1.0b              ƒgƒƒC‚Ì–Ø”n‚Ìì¬ƒLƒbƒgBDOS—pB
+10) Virus Creation Laboratory —L–¼‚Èvirusì¬ƒc[ƒ‹B
+11) Virus Lab Creation Tool_v1.0 “¯ãBƒƒ‚ƒŠí’“Œ^‚ÌƒEƒBƒ‹ƒX‚ðì‚éB
+
+
+88888888888888888888888
+    ƒ[Eƒ_ƒCƒ„ƒ‰[
+88888888888888888888888
+
+1) BlueBEEP_v0.10á         ƒxƒXƒgƒ_ƒCƒ„ƒ‰[‚ÆŒ¾‚í‚ê‚éBSB‚ðƒTƒ|[ƒgB
+2) BlueBEEP Source         ã‹L‚Ìƒ\[ƒXƒR[ƒhB
+3) Dialing Demon_v1.05     DOS‚ÌŠî–{“I‚Èƒ_ƒCƒ„ƒ‰[B
+4) No Carrier              DOS—pƒXƒLƒƒƒiB
+5) Phone Tag_v3.0          Windows—pƒXƒLƒƒƒiBƒ_ƒCƒ„ƒ‹”Ô†‚ðŽ©“®¶¬‚·‚éB
+                           ‚È‚º‚©•MŽÒ‚ÌHD‚É‚à“ü‚Á‚Ä‚¢‚éB
+6) THC Scan_v1.0           ƒ_ƒCƒ„ƒ‰[‚Ì‘¼‚ÉŠeŽíƒc[ƒ‹‚ðŠÜ‚ÞB
+7) ToneLoc v1.10           Å‚à—L–¼‚È PC—pToneLoc ƒ[Eƒ_ƒCƒ„ƒ‰[/ƒXƒLƒƒƒi
+                           ìŽÒ Mucho Maas & Minor Threat
+8) ToneLoc Utilites        ToneLoc—pƒc[ƒ‹ƒpƒbƒP[ƒWB
+9) Vexation's Autodial     GUI‚ðŽ‚Â WardialerB
+10) Z-Hacker_v3.21         –³ŒÀ‚Ì”Ô†¶¬‚Æ single/multiple ƒnƒbƒNƒvƒƒZƒXB
+                           300-19200ƒ{[‚ðƒTƒ|[ƒgBƒJƒXƒ^ƒ}ƒCƒY‹@”\•t‚«B
+
+# ˆê“x“d˜b‚ð‚©‚¯‚é‚Æ10‰~‚©‚©‚é‚±‚Æ‚ð–Y‚ê‚È‚¢‚æ‚¤‚ÉDD
+
+
+=================================================================
+
+ˆê‰ž—L–¼‚Ç‚±‚ë‚Í“ü‚ê‚é‚Â‚à‚è‚Å‚µ‚½‚ªA•MŽÒ‚Ì”\—ÍA‘Ì—ÍAŽžŠÔA‚¨‚æ‚Ñ‹C—Í‚ÌŒ¸‘Þ‚É
+‚æ‚è“úX‘B‚·‚éƒŠƒXƒg‚ð‚Ü‚Æ‚ß‚éŒÀŠE‚ðŠ´‚¶‚Ü‚µ‚½B”²‚¯‚½—L–¼‚Èƒtƒ@ƒCƒ‹‚âà–¾‚ðŠÔ
+ˆá‚¦‚½‚Æ‚±‚ë‚à‚ ‚é‚©‚à‚µ‚ê‚È‚¢B‚¢‚âA‚ ‚éBŽ‘—¿‚ª‚â‚âŒÃ‚¢‚½‚ßƒo[ƒWƒ‡ƒ“up‚ªs‚í
+‚ê‚Ä‚¢‚éƒvƒƒOƒ‰ƒ€‚à‘½‚¢‚ÆŽv‚í‚ê‚éBŒë‚è‚Í‰“—¶–³‚­Žw“E‚µ‚Ä’¸‚«‚½‚¢BŒ¤‹†—pƒtƒ@ƒC
+ƒ‹‚ðƒ_ƒEƒ“ƒ[ƒh‚·‚éÛ‚ÌŽQl‚É‚È‚ê‚ÎK‚¢‚Å‚ ‚éBƒtƒ@ƒCƒ‹‚Ì’u‚¢‚Ä‚ ‚éêŠ‚âŽg‚¢•û
+‚É‚Â‚¢‚Ä‚ÍA•MŽÒ‚ÍˆêØƒRƒƒ“ƒg‚Å‚«‚Ü‚¹‚ñ‚Ì‚ÅB”O‚Ì‚½‚ßDD
+
+mmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmm
+
+
+ÅŒã‚É..
+
+win ‰SŽÒŒü‚¯‚Ìu‚ ‚â‚µ‚¢Žg‚¢•û‚ÌÐ‰îv‚Æ‚µ‚Ä‚¢‚­‚Â‚©‚ÌÍ‚ð‘‚¢‚Ä‚Ý‚Ü‚µ‚½‚ªA‚¢
+‚©‚ª‚¾‚Á‚½‚Å‚µ‚å‚¤‚©B‚È‚é‚×‚­Šî–{“I‚È•”•ª‚É‹»–¡‚ðŽ‚Ä‚é‚æ‚¤‚¢‚ë‚¢‚ë‚È•ª–ì‚©‚ç˜b
+‘è‚ð’T‚µ‚½‚Â‚à‚è‚Å‚·‚ªA‚³‚Ä”½‰ž‚ÍDD
+
+‚»‚ê‚É‚µ‚Ä‚àƒAƒz‚È•¶Í‚ð‘å—Ê‚ÉŽT‚¢‚Ä‚µ‚Ü‚¢‚Ü‚µ‚½BŠ°‘å‚É‚à‚±‚Ì‚æ‚¤‚È•¶‘‚Ì“\‚è•t
+‚¯‚ð‚¨‹–‚µ’¸‚¢‚½ŠÇ—l—l‚ÆAƒAƒz‚È•¶Í‚É‚Â‚«‡‚Á‚Ä’¸‚¢‚½“ÇŽÒ‚ÌŠF—l‚É‚Í‚ ‚ç‚½‚ß‚Ä
+‚¨—ç\‚µã‚°‚Ü‚·B‚µ‚Î‚ç‚­‹x—{‚µ‚Ü‚·‚ªA‚¨‚à‚µ‚ë‚¢ƒlƒ^‚ª‚ ‚è‚Ü‚µ‚½‚çA‚º‚Ð‚¨’m‚ç
+‚¹‰º‚³‚¢B
+
+[ 97/08/22 ]// ‘|œl  NOBU-SONS@usa.net
+
+
+                        /***(‰¼)‚¨Žq—lWin‘æˆêŠª‚¨‚í‚è***/
+                                  1997-Copyleft
+                    =========================================
+
+

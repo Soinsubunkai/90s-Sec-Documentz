@@ -1,0 +1,398 @@
+                      ====================================
+                        The ShadowPenguin Documents No.9
+
+                             - ログの解体と消去法 -
+                               Written by うにゅん
+                                  Oct.29, 1998
+                      ====================================
+
+1. はじめに
+
+本テキストは、Solaris の接続ログの詳細とその消し方についての技術資料です。こうい
+ったログの消去法もあるので、ログなんて何の証拠にもならないことが良く分かりますね。
+必要ならば書き換えもできるのですから。また、ログ消しツールulw.c の使用法も解説し
+ます。本テキストでは、以下の５つのログを対象に実験を行った結果を示します。
+
+/var/adm/wtmp
+/var/adm/wtmpx
+/var/adm/utmp
+/var/adm/utmpx
+/var/adm/lastlog
+
+実験はSolaris2.6(Sparc)で行いました。
+
+2. Solarisの接続ログ管理
+
+Solaris では、telnetやftp 等の接続ログ管理ファイルとしてwtmp,wtmpxという２つのフ
+ァイルを用います。この２つのファイルにlogin 、logput日時やホスト等のログが保存さ
+れています。また、現在誰がlogin してるのか等を管理するファイルとしてutmp,utmpxと
+いう２つのファイル、各ユーザ毎に最後にlogin した日時やホストなどを保存するlastlo
+g というファイルも用意されています。侵入者は、普通こういうログを消していきますね。
+もちろん、これらのログを消すにはrootになる必要があります。
+
+まぁ、rmで消せばたしかにログは消えますが、これでは「侵入しましたよ」って大声で叫
+んでるみたいなものなので、普通はそんなことはしないです。でもこれらのログはクリア
+テキストじゃないので、viとかで編集できるものじゃありません。そこで、ログ消しツー
+ルを使って、特定のログだけ消すっていうのが一般的ですね。一番有名なのがzap で、So
+laris 用だとwtmpx.c というヤツです。これでたしかに特定ユーザのログだけ消して、la
+stコマンドを使っても表示されないようになっています。でもコレにも欠点があります。
+この問題と解決策を解説する前に、まずこれらのログがどのように生成・保存されている
+のかを解説します。
+
+3. 各種ログファイルの動き
+
+５つのログファイルの生成・保存過程はlastコマンドでは正確に把握できません。また、
+クリアテキストではないのでcat で検査することもできません。これらのログはFig.1 に
+示すようなレコード形式で保存されています。
+
+/var/adm/wtmp,utmp          /var/adm/wtmpx,utmpx        /var/adm/lastlog
+------------------------    ------------------------    ----------------------
+user名           8byte      user名           32byte     login時刻   4byte
+ID               4byte      ID               4byte      デバイス名     8byte
+デバイス名       12byte     デバイス名       12byte     ホスト名       16byte
+プロセスID       2byte      プロセスID       2byte
+エントリタイプ   2byte      エントリタイプ   2byte
+終了ステータス   4byte      終了ステータス   4byte
+エントリ追加時刻 4byte      エントリ追加時刻 4byte
+                            セッションID     4byte
+                            予備バッファ     20byte
+                            Host名長         2byte
+                            Host名           257byte
+
+                         Fig.1 各ログファイルのレコード
+
+
+このレコードが、login,logout等のたびにwtmpなどに追加されていきます。telnet等の場
+合は、接続・login ・logoutと３回にわたりwtmp,wtmpxに追加されます。lastコマンドで
+は、そのうち最終のものしか表示されません（エントリタイプで識別）ので、全ての過程
+のログを見るには専用のログビューアが必要になります。本テキストでの実験は、ココに
+掲載されているlogchk.cを用いました。なお、logchkでは、レコード中の有用であると思
+われるパラメータしか表示しませんが、ログの生成過程を理解する上では十分でしょう。
+logchkでのログ生成過程を実例を交えて解説します。
+　まず、各種ログが空の状態でユーザunyun がtelnetでlogin,logoutしたときのログの生
+成過程をFig.2 に示します。
+
+[wtmp]
+Name            id     Line            Type Time           
+----------------------------------------------------------------------
+.telnet         tn10   /dev/pts/7         6 Tue Oct 27 22:44:42 1998  (*1)
+unyun           tn10   pts/7              7 Tue Oct 27 22:44:46 1998  (*2)
+unyun           tn10   pts/7              8 Tue Oct 27 22:49:46 1998  (*3)
+[wtmpx]
+Name            id     Line            Type Host           
+----------------------------------------------------------------------
+.telnet         tn10   /dev/pts/7         6                           (*1)
+unyun           tn10   pts/7              7 pentagon.com              (*2)
+unyun           tn10   pts/7              8 pentagon.com              (*3)
+[utmp]
+Name            id     Line            Type Time           
+----------------------------------------------------------------------
+unyun           tn10   pts/7              8 Tue Oct 27 22:49:46 1998
+[utmpx]
+Name            id     Line            Type Host           
+----------------------------------------------------------------------
+unyun           tn10   pts/7              8 pentagon.com
+[lastlog]
+Name        : Host           Line            Time
+----------------------------------------------------------------------
+unyun       : pentagon.com   pts/7           Tue Oct 27 22:50:43 1998
+
+                     Fig.2 telnetでのloginとlogout
+
+telnetで接続すると、まず(*1)に示すようにwtmp,wtmpxに".telnet" という名前で追加さ
+れます。そして、idやデバイスが割り振られ、接続時刻が記録され、エントリタイプは6 
+（接続）として記録されます。次に、telnetではLogin 名とPasswordを求められますので
+、それを通過すると(*2)に示すようにlogin 名、エントリタイプ7 （login 完了）、logi
+n 時刻、ホスト名等が記録されます。logoutすると、(*3)に示すようにlogout時刻などが
+記録されます。なお、telnetだけでなく、rloginやftp もwtmp,wtmpxに記録されます。rl
+ogin、ftp の記録例をFig.3 に示します。ftp に関しては接続時の記録はなく、エントリ
+タイプは7 からの記録となります。また、idは"ftp" 統一となり、識別にはLine（デバイ
+ス名）を用います。
+
+(1) rlogin ※wtmpにも記録される
+[wtmpx]
+Name            id     Line            Type Time           
+--------------------------------------------------------------
+.rlogin         rl10   /dev/pts/7         6                   (接続時)     
+
+(2) ftp ※wtmpにも記録される
+[wtmpx]
+Name            id     Line            Type Host           
+--------------------------------------------------------------
+unyun           ftp    ftp9609            7 pentagon.com      (login時)
+                ftp    ftp9609            7                   (logout時)
+
+                      Fig.3 rloginおよびftpの記録例
+
+
+utmp,utmpxは、そのユーザの最新のwtmp,wtmpxエントリが書かれます。つまり、接続時は
+(*1)、login 後は(*2)が上書き、logout後は(*3)が上書きされます。who コマンド等はut
+mp,utmpx中のエントリタイプ7 の項目のみを整形して表示しているものと思われます。la
+stlog はlogin 直後、つまりlogin ユーザのエントリタイプ7 の状態のユーザ名、ホスト
+名、デバイス、時刻が記録されます。
+
+wtmp,wtmpxは接続履歴の保存が目的ですから、普通は( 消されない限り) ログが上書きさ
+れたり減ったりすることはありません( ただし保存管理上、管理者やOSが古いログを保存
+・消去して0 クリアすることもある) 。ただし、utmp,utmpxは、現在のlogin 状況を知る
+ためのログですので、logoutしたユーザのエントリには上書きがあります。上書きが起こ
+る可能性のあるutmpの例をFig.4 に示します。
+
+[utmp]
+Name            id     Line  Type Time           
+----------------------------------------------------------
+unyun           tn10   pts/7    7 Tue Oct 27 22:50:43 1998 
+aho             tn20   pts/8    7 Tue Oct 27 22:52:10 1998
+hoge            rl10   pts/11   8 Tue Oct 27 22:53:59 1998 < 上書き可能性アリ
+herohero        rl20   pts/12   7 Tue Oct 27 22:48:47 1998
+hohoho          tn30   pts/11   8 Tue Oct 27 22:53:25 1998 < 上書き可能性アリ
+bokeboke        rl30   pts/8    8 Tue Oct 27 22:51:23 1998 < 上書き可能性アリ
+
+　　　　　　　　　　　　Fig.4 utmpの上書きタイミング
+
+utmpは、idでソートされます。idはtelnet用の"tn"、およびrlogin用の"rl"があり、それ
+ぞれlogin 時に他のlogin との識別用に用いられます。utmp中のidは重複がありません。
+つまり、logoutしたユーザは、次に同じidが割り振られたlogin が現わると、その接続で
+上書きされます。なお、utmp,utmpxには、ftp の接続は記録されません。lastlog は各ユ
+ーザで管理されますので、最大ユーザID数のエントリが存在します。lastlog の例をFig.
+5 に示します。
+
+[lastlog]
+Name       : Host            Line            Time
+-----------------------------------------------------------------------
+unyun      : pentagon.com    73              Tue Oct 27 22:53:01 1998
+hoge       : police.com      pts/11          Tue Oct 27 22:53:57 1998
+herohero   : usa.com         pts/11          Tue Oct 27 22:52:26 1998
+hohoho     : localhost       pts/12          Tue Oct 27 22:46:58 1998
+hoge       : host1           pts/8           Tue Oct 27 22:52:10 1998
+bokeboke   : ppp.hoge.com    pts/11          Tue Oct 27 22:53:25 1998
+
+                             Fig.5 Lastlogの例
+
+lastlog はユーザIDでソートされています。logchk.cでは、実際に存在するユーザのみの
+lastlog を表示しますが、実際はもう少し多くのエントリがある場合があります。たとえ
+ばユーザbokebokeのユーザIDが2000の場合、2000エントリ存在することになります。これ
+らのエントリはlogin ごとに上書きされます。なお、lastlog はftp ログもlogin とみな
+し記録されます。
+
+以上のログの実際のサンプルをFig.6 に示し、動作を追跡してみます。なお、wtmpx 、ut
+mpx は省略します。
+
+[wtmp]
+Name     id     Line     Type Time           
+------------------------------------------------------
+.telnet  tn10   /dev/pts/7  6 Tue Oct 27 22:44:42 1998
+unyun    tn10   pts/7       7 Tue Oct 27 22:44:46 1998 unyun1がtelnetでlogin
+.telnet  tn20   /dev/pts/8  6 Tue Oct 27 22:45:15 1998
+unyun    tn20   pts/8       7 Tue Oct 27 22:45:18 1998 unyun2がtelnetでlogin
+addely   ftp    ftp9569     7 Tue Oct 27 22:45:38 1998 addelyがftpでlogin
+.rlogin  rl10   /dev/pts/11 6 Tue Oct 27 22:45:58 1998
+unyun    rl10   pts/11      7 Tue Oct 27 22:46:00 1998 unyun3がrloginでlogin
+         ftp    ftp9569     7 Tue Oct 27 22:46:09 1998 addelyがftplogout
+.rlogin  rl20   /dev/pts/12 6 Tue Oct 27 22:46:49 1998
+addely   rl20   pts/12      7 Tue Oct 27 22:46:58 1998 addelyがrloginでlogin
+.telnet  tn30   /dev/pts/13 6 Tue Oct 27 22:47:15 1998
+rockhop  tn30   pts/13      7 Tue Oct 27 22:47:18 1998 rockhopがtelnetでlogin
+.telnet  tn40   /dev/pts/14 6 Tue Oct 27 22:47:37 1998
+humboldt tn40   pts/14      7 Tue Oct 27 22:47:41 1998 humboldtがtelnetでlogin
+humboldt tn40   pts/14      8 Tue Oct 27 22:47:42 1998 humboldtがtelnetlogout
+rockhop  tn30   pts/13      8 Tue Oct 27 22:47:54 1998 rockhopがtelnetlogout
+humboldt ftp    ftp9609     7 Tue Oct 27 22:48:17 1998 humboldtがftpでlogin
+addely   rl20   pts/12      8 Tue Oct 27 22:48:23 1998 addelyがrloginlogout
+.rlogin  rl20   /dev/pts/12 6 Tue Oct 27 22:48:45 1998
+unyun    rl20   pts/12      7 Tue Oct 27 22:48:47 1998 unyun3がrloginでlogout
+.rlogin  rl30   /dev/pts/13 6 Tue Oct 27 22:49:16 1998
+rockhop  rl30   pts/13      7 Tue Oct 27 22:49:17 1998 rockhopがrloginでlogin
+         ftp    ftp9609     7 Tue Oct 27 22:49:35 1998 humboldtがftplogout
+unyun    tn10   pts/7       8 Tue Oct 27 22:49:46 1998 unyun1がtelnetlogout
+unyun    tn20   pts/8       8 Tue Oct 27 22:49:47 1998 unyun2がtelnetlogout
+rockhop  rl30   pts/13      8 Tue Oct 27 22:49:54 1998 rockhopがrloginlogout
+・・・以下略
+
+[utmp]
+Name     id     Line     Type Time           
+------------------------------------------------------
+unyun    tn10   pts/7       7 Tue Oct 27 22:50:43 1998 tn10はunyunがlogin中
+snares   tn20   pts/8       7 Tue Oct 27 22:52:10 1998 tn20はsnareslogin中
+humboldt rl10   pts/11      8 Tue Oct 27 22:53:59 1998 rl10はhumboldtが最終
+unyun    rl20   pts/12      7 Tue Oct 27 22:48:47 1998 rl20はunyunがlogin中
+gentoo   tn30   pts/11      8 Tue Oct 27 22:53:25 1998 tn30はgentooが最終
+humboldt tn40   pts/14      8 Tue Oct 27 22:47:42 1998 tn40はhumboldtが最終
+rockhop  rl30   pts/8       8 Tue Oct 27 22:51:23 1998 rl30はrockhopが最終
+
+[lastlog]
+Name     : Host        Line    Time
+------------------------------------------------------
+unyun   : hacker.com   73     Tue Oct 27 22:53:01 1998 unyunは22:53:10にftp
+humboldt: pentagon.com pts/11 Tue Oct 27 22:53:57 1998 humboldtは22:53:57にlogin
+rockhop : yyy.ne.jp    pts/11 Tue Oct 27 22:52:26 1998 rockhopは22:52:26にlogin
+addely  : hacker.com   pts/12 Tue Oct 27 22:46:58 1998 addelyは22:46:58にlogin
+snares  : pentagon.com pts/8  Tue Oct 27 22:52:10 1998 snaresは22:52:10にlogin
+gentoo  : xxx.ac.jp    pts/11 Tue Oct 27 22:53:25 1998 gentooは22:53:25にlogin
+
+                                      Fig.6 ログサンプル
+
+4. ZAP系ログ消しとその問題点
+
+ZAP は、指定されたユーザ名を含むエントリを全てnullで埋めます。lastコマンドなどは
+、nullがあるとその行は表示しないという特徴があり、それを利用したものです。つまり
+、Fig.6 の例にZAP 系ログ消しツールを用いてユーザunyun とaddelyを削除した場合、ロ
+グはFig.7 のようになります。
+
+※ wtmpx、utmpxは省略してあります。
+[wtmp]
+Name            id     Line            Type Time           
+--------------------------------------------------------------------
+.telnet         tn10   /dev/pts/7         6 Tue Oct 27 22:44:42 1998
+
+.telnet         tn20   /dev/pts/8         6 Tue Oct 27 22:45:15 1998
+
+
+.rlogin         rl10   /dev/pts/11        6 Tue Oct 27 22:45:58 1998
+
+                ftp    ftp9569            7 Tue Oct 27 22:46:09 1998
+.rlogin         rl20   /dev/pts/12        6 Tue Oct 27 22:46:49 1998
+
+.telnet         tn30   /dev/pts/13        6 Tue Oct 27 22:47:15 1998
+
+.telnet         tn40   /dev/pts/14        6 Tue Oct 27 22:47:37 1998
+humboldt        tn40   pts/14             7 Tue Oct 27 22:47:41 1998
+humboldt        tn40   pts/14             8 Tue Oct 27 22:47:42 1998
+rockhop         tn30   pts/13             8 Tue Oct 27 22:47:54 1998
+humboldt        ftp    ftp9609            7 Tue Oct 27 22:48:17 1998
+
+.rlogin         rl20   /dev/pts/12        6 Tue Oct 27 22:48:45 1998
+
+.rlogin         rl30   /dev/pts/13        6 Tue Oct 27 22:49:16 1998
+rockhop         rl30   pts/13             7 Tue Oct 27 22:49:17 1998
+                ftp    ftp9609            7 Tue Oct 27 22:49:35 1998
+
+
+rockhop         rl30   pts/13             8 Tue Oct 27 22:49:54 1998
+・・・以下略
+
+[utmp]
+Name            id     Line            Type Time           
+--------------------------------------------------------------------
+
+snares          tn20   pts/8              7 Tue Oct 27 22:52:10 1998
+humboldt        rl10   pts/11             8 Tue Oct 27 22:53:59 1998
+unyun           rl20   pts/12             7 Tue Oct 27 22:48:47 1998
+gentoo          tn30   pts/11             8 Tue Oct 27 22:53:25 1998
+humboldt        tn40   pts/14             8 Tue Oct 27 22:47:42 1998
+
+[lastlog]
+Name       : Host            Line            Time
+---------------------------------------------------------------------
+
+humboldt   : pentagon.com    pts/11          Tue Oct 27 22:53:57 1998
+rockhop    : yyy.ne.jp       pts/11          Tue Oct 27 22:52:26 1998
+
+snares     : pentagon.com    pts/8           Tue Oct 27 22:52:10 1998
+gentoo     : xxx.ac.jp       pts/11          Tue Oct 27 22:53:25 1998
+
+                   Fig.7 ZAP系ログ消しで消されたログ
+
+このように、いたるところにnullによる空行ができ、lastlog より消されたユーザ、wtmp
+の.telnet 、.rlogin エントリなどから侵入時刻が特定できます（IRIX等ではログ保存形
+式が異なるため、不正使用ユーザのlogout時刻も特定できます）何より、ログを消した痕
+跡が完全に残ってしまいます。しかし、少し工夫すれば、これらの痕跡を消すことも可能
+です。
+
+5. 痕跡の分からないログの消去法
+
+特定のユーザの1 エントリ分のログを削除したい場合、wtmp/wtmpxの場合は、そのユーザ
+が使用している他のエントリも消す必要があります。telnetの場合、ユーザ名がName部に
+ロギングされるのはエントリタイプが7 と8 の時だけで、6 の時は.telnet 等の名前でロ
+ギングされます。つまり、login 中にログを削除したい場合、エントリタイプの6,7 、過
+去のログを削除したい場合は6,7,8 を削除する必要があります。ftp の場合も、ftplogou
+t 後は１ユーザにつき２エントリ分削除しないと、Nameが空白のエントリが残ってしまい
+ます。これらに注意してwtmp/wtmpxのログを削除しなければなりません。また、utmp/utm
+pxに関しては、wtmp/wtmpxで対象となったエントリかどうかを検査する必要があります。
+つまり、wtmp/wtmpxで対象となったユーザのidがtn10であった場合、utmp/utmpxではtn10
+以外のログを変更してはいけません。そして、utmp/utmpx中のtn10のエントリは削除する
+のではなく、対象となったユーザより一つ古い同一idのユーザのものと置きかえる必要が
+あります。置き換えは、エントリタイプは8 でないと、who で出てきますので8 のものを
+選びます。lastログはwtmp/wtmpxを検査して、消去したいエントリと同一ユーザ名の一つ
+古いwtmp/wtmpxエントリからパラメータを抽出して埋める必要があります。
+
+これらの一連の作業を行うログ消しがulw.c です。なお、このツールは、実験用です。実
+際にどこかに侵入してコレをつかってログを消さないようにしましょうね。
+
+6. ulwの使い方
+
+ulw はココのHPで入手できます。まず、ulw をコンパイルしてください。
+
+%cc ulw.c -o ulw (もしくは gcc ulw.c -o ulw)
+
+Rootになる
+
+#./ulw 消したいユーザ名
+
+これで、指定したユーザのログが１つ分消えます。最新のログから消えていきます。
+なお、
+
+#./ulw -u
+
+で、zapなどで消去されたログを可能な限り再構築し、ZAP系ログ消しの痕跡を消します。
+また、
+
+#./ulw -u 消したいユーザ名
+
+とすると、ZAP系ログの再構築を行ってから、指定ユーザのログ消しを行います。
+
+7. さいごに
+
+ログが痕跡も残さず消せるからって、どっかに侵入してログをさらっと消してくるなんて
+のはやめましょうね。追跡できなくなってしまう可能性もありますから(笑)
+
+
+－ 参考文献 －
+
+[1] Reverse,"xxプログラミング","http://members.tripod.com/~reverse/",1998
+[2] "wtmpx.c","zap2.c"
+
+－ 参考資料 －
+
+[ Solaris2.6 utmp,utmpx構造体抜粋 ]
+
+struct exit_status {
+        short e_termination;            /* Process termination status */
+        short e_exit;                   /* Process exit status */
+};
+struct utmp {
+        char ut_user[8];                /* User login name */
+        char ut_id[4];                  /* /etc/inittab id(usually line #) */
+        char ut_line[12];               /* device name (console, lnxx) */
+        short ut_pid;                   /* short for compat. - process id */
+        short ut_type;                  /* type of entry */
+        struct exit_status ut_exit;     /* The exit status of a process */
+                                        /* marked as DEAD_PROCESS. */
+        time_t ut_time;                 /* time entry was made */
+};
+struct utmpx {
+        char    ut_user[32];            /* user login name */
+        char    ut_id[4];               /* inittab id */
+        char    ut_line[32];            /* device name (console, lnxx) */
+        pid_t   ut_pid;                 /* process id */
+        short   ut_type;                /* type of entry */
+#if !defined(_XPG4_2) || defined(__EXTENSIONS__) /*通常はこの条件はtrue*/
+        struct exit_status ut_exit;     /* process termination/exit status */
+#else
+        struct ut_exit_status ut_exit;  /* process termination/exit status */
+#endif
+        struct timeval ut_tv;           /* time entry was made */
+        long    ut_session;             /* session ID, used for windowing */
+#if !defined(_XPG4_2) || defined(__EXTENSIONS__)  /*通常はこの条件はtrue*/
+        long    pad[5];                 /* reserved for future use */
+#else
+        long    __pad[5];               /* reserved for future use */
+#endif
+        short   ut_syslen;              /* significant length of ut_host */
+                                        /*   including terminating null */
+        char    ut_host[257];           /* remote host name */
+}
+struct lastlog {
+        time_t  ll_time;
+        char    ll_line[8];
+        char    ll_host[16];            /* same as in utmp */
+};

@@ -1,0 +1,225 @@
+                      ====================================
+                        The ShadowPenguin Documents No.2
+
+                            -ＩＲＩＸ防御マニュアル -
+                               Written by うにゅん
+                                  Oct.18, 1998
+                      ====================================
+
+1. はじめに
+
+このテキストは、侵入者からIRIXの身を守るための罠について書いてます。メインはIRIX
+ですが、他のUNIXでも応用できる物もあります。私が以前書いた「IRIX攻撃マニュアル」
+にもありますが、IRIXにはポート5232でlistenしてる特殊なアプリがあり、それでIRIXマ
+シンを特定されます。さらに、ディフォルトアカウントが幾つか存在しますので、それに
+パスをかけてない場合はさらっと侵入され、ヘボい場合はサクっとrootを盗られます。一
+度ハックされると多少の対策はムダというものです。こうなったら、侵入者を取っ捕まえ
+て「ごめんなさい」と言わせましょう、ってのがこのテキストの主旨であり、けっして「
+ハッカーのためのIRIX鯖の罠の見破り方」じゃないです。
+
+2. ある日気付く
+
+いくらヘボい管理者が管理してても、いづれは侵入されたことに気付くってことはよくあ
+ります。そう、踏み台にしてる場合ですね。踏み台経由でターゲットに侵入したのはいい
+けれど、root盗れなかった、もしくはトロイ等の結果待ちってことはありがちですね。ど
+の鯖でも速攻って訳にはいきません。そういうときに、ターゲットの管理者がログをチェ
+ックして、踏み台にクレームをつけるわけです。そうやってヘボい管理者はハックに気付
+きます。
+
+3. 対策する
+
+さて、どうしたものか... と管理者は考えます。firewallは導入するのには検討会議やな
+んやで時間がかかるし、お金もかかるし、不便だし。そこで、罠を仕掛けるわけです。以
+下に罠の例を挙げます。でも幾つかの罠は、やっぱり見破られて外されてしまいます。そ
+れらの罠の問題点も明確にすべく、見破り方もかいてます。要するに、そういう罠はroot
+とられると無意味ってことですね。
+
+[1] TCP-wrapper
+
+有名ですね。本来は指定IP以外のTCP を通さないようにするっていう目的で使われます。
+でも、どこからでもアクセスできるようにして、ログだけとることができます。コイツは
+デーモンですが、inetd から直接telnetd 等を呼ばず、このデーモンから間接的に呼ばれ
+ます。このデーモンは、バレにくくするため通常in.telnetd等の名前にして、本物のin.t
+elnetdなどは別に保存されているコトがおおいです。
+
+見破り方（以下のいずれか一つでもあると、TCP-Wrapperが入ってる可能性があります）
+
+(1) /etc/hosts.arrowや/etc/hosts.deny とかいうファイルがある
+    接続許可、拒否ホスト一覧です。
+
+(2) /etc/syslog.conf にロギングが指定されている
+    local5.info/var/log/tcp_wrapper.log みたいに指定されています。ほとんどコレで
+    特定できます。ログは、こんな感じで残っていきます。
+
+    Oct 21 11:12:13 hoge telnetd[1234]: connect from root@hacker.com
+    Oct 22 12:23:44 hohoho ftpd[4567]: connect from ppp01-hoge@hogehoge.ne.jp
+
+(3) /etc/inetd.confで、telnetやftpなどに同じdeamonが指定されている
+    普通は、
+
+    ftp stream tcp nowait root /usr/etc/ftpd ftpd -l
+    telnet stream tcp nowait root /usr/etc/telnetd telnetd
+
+    みたいな感じですが、
+
+    ftp stream tcp nowait root /usr/etc/tcpd ftpd -l
+    telnet stream tcp nowait root /usr/etc/tcpd telnetd
+
+    みたいな感じになってます。
+
+(4) 誰かのhomeにTCP-Wrapperらしいソースが落ちてる
+    find / -name tcp_wrappers_7.6 -print
+    みたいに検索すると出るかもしれません。
+
+[2] cron
+
+cronってのは、特定時間にとあるプログラムを実行させるというものです。これを応用し
+て、wtmpやSYSLOG等をバックアップすれば、通常の方法でログ消しされてもログは残りま
+すね。
+
+見破り方
+
+crontab -lとすると、現在のcrontabの設定状況が出ます。
+%crontab -l
+1 * * * * cp /var/adm/SYSLOG /usr/people/hoge/.cshrc_bak
+みたいに出てきたら要注意。（これは一分ごとにSYSLOGをコピーするというものです）ち
+なみに、crontab -lで出てくるのは、各ユーザーが設定したcrontab です。どのユーザが
+罠をはってるか分かりません。ただ、crontab は
+/var/spool/cron/crontabs
+にspool されますので、ここで確認できます。ちなみに、移動するにはrootじゃないとダ
+メです。
+
+[3] SYSLOG多重保存
+
+IRIXのSYSLOGはwtmpより強力ですね。telnet失敗や5232記録（これはIPは出ないですが）
+sendmailまでログります。普通は/var/admにありますね。これはsyslogd により管理され
+てますので、/etc/syslog.confに
+
+kern.debug |/usr/sbin/klogpp /var/adm/SYSLOG
+*.debug;kern.none /var/adm/SYSLOG
+*.crit |/usr/sbin/sysmonpp /var/adm/SYSLOG
+
+みたいに書かれてます。
+で、このセットをもう一つsyslog.confに指定する訳です。
+
+kern.debug |/usr/sbin/klogpp /var/adm/SYSLOG
+*.debug;kern.none /var/adm/SYSLOG
+*.crit |/usr/sbin/sysmonpp /var/adm/SYSLOG
+kern.debug |/usr/sbin/klogpp /usr/people/hoge/hohoho
+*.debug;kern.none /usr/people/hoge/hohoho
+*.crit |/usr/sbin/sysmonpp /usr/people/hoge/hohoho
+
+これで、/var/adm/SYSLOGがいくら消されても、生き残ります。
+
+見破り方
+
+簡単ですね。/etc/syslog.confにあやしいものが書かれてたら、見に行きましょう。
+
+[4] syslogd多重起動
+
+SYSLOGを意地でも残すワザです。
+
+%cd /usr/people/hoge
+%cp /usr/etc/syslogd hogelogger
+%cp /etc/syslog.conf hogelogger.conf
+
+ログを指定
+
+%cat hogelogger.confkern.debug |/usr/sbin/klogpp /usr/people/hoge/hohoho
+*.debug;kern.none /usr/people/hoge/hoge.log
+*.crit |/usr/sbin/sysmonpp /usr/people/hoge/hoge.log
+kern.debug |/usr/sbin/klogpp /usr/people/hoge/hoge.log
+%hogelogger -f hogelogger.conf
+
+これで、多重起動です。hoge.logにSYSLOGと同じ内容が残ります。
+
+見破り方
+
+ps -elfとかで確認するしかないです。そして、'-f' オプションが指定されているヤツが
+あったら、そのファイルを検索します。cat すれば確認できます。
+
+[5] syslogd多重起動＋ps改
+
+上記[4] で、発見を難しくするため、psを改造することもあります。つまり、psしてもho
+geloggerが出てこないんですね。原理的には簡単で、ニセpsを/usr/binに置いといて、そ
+のニセpsは、名前を変えられた普通のpsを呼んで結果をファイルに保存します。ニセpsは
+そのファイルの内容を読んで表示するのですが、そのときhogeloggerのみ表示しないよう
+にすればいいのです。
+
+見破り方
+
+全バージョンのノーマルpsをコレクションしておきます。そして、バイナリで転送して、
+diff( ファイル比較) します。
+
+%diff /usr/bin/ps ps_collection1
+Binary files /usr/bin/ps and ps_collection1 differ
+
+って出たら、内容が違うってことです。
+もちろん、コレクションしたpsで実行すれば出ます。
+
+[6] ニセDeamon
+
+大抵オリジナル物ですね。TCP-wrapper みたいなヤツを作ってしまう訳ですが、/etc/sys
+log.confになんて何もありません。TCP-wrapper よりはちょっと高級ですね。こういうの
+を作れば、5232スキャンのIPをロギングすることも簡単です。tdm なんかも見つけること
+ができると、尻尾をつかめますね。
+
+見破り方
+
+例えば、/etc/inetd.conf でtelnetができないようになってるにもかかわらず、telnet出
+来てしまったらこういう罠が仕込まれてる可能性があります。例えばこんな風に頭に# が
+ついてるか、
+
+#telnet stream tcp nowait root /usr/etc/telnetd telnetd
+
+この行自体がないかです。
+これの厄介なところは、ログがどこに残ってるのか分からない点です。しかも、オリジナ
+ル物なので、どういう形式かも分かりません。ログも暗号化されてると発見・削除は困難
+でしょうね。こういう時は、ニセデーモンのソースが落ちてないか、必死で探します。運
+良く見つかった場合は、ソースを便りに消すしかないです。ってことで、これは結構強力
+です。
+
+[7] Packet monitoring
+
+sniffer などはHackerの強い味方ですが、管理者にも強い味方です。このような、パケッ
+トLoggerを仕掛けると、どこから来てどこに行ったか、まる分かりですね。LAN 内ならど
+こに仕掛けてもOKですから強力です。モニタリング専用サーバセキュをむちゃくちゃ強化
+して、「ほとんどのネットワークサービスを禁止」が置いてあった場合は、侵入者にとっ
+てとってはかなりつらいですね。そういう場合は、発見・ログ消しは難しいでしょう。
+
+[8] ログ転送
+
+これも強力な例です。普通は[6] と組み合わせて使います。転送先がモニタリング専用鯖
+だったり、しっかりしたPCだったりすると、侵入者もお手上げです。しかも、パケットモ
+ニタリングでもしない限り、発見も出来ませんし、暗号化されてるとパケットモニタリン
+グしてもムダです。外部からの侵入があると、警報装置が働く（PCが管理者に自動で電話
+をして、侵入者のドメインやIPを読み上げるなど）こともできますので、迅速に対応でき
+ます。
+
+[9] システム監査トレールの管理
+
+これは、ユーザーがやらかした反則行為までロギングします。このデーモンが走ってると
+、%name-a で
+
+Trusted IRIX/B　System_name ???? ?????
+
+みたに表示されます。走ってなければ、
+
+IRIX　System_name ???? ????
+
+みたいな感じです。
+ユーザがやらかした違反ってのは、アクセス許可の無いファイルアクセスを試みたり、パ
+スワードを推測したり、通常の方法以外でrootになったり... 考えられる違反は全てチェ
+ックされます。もちろん、外部侵入も記録されます。しかも、ログファイルは独自の暗号
+化がなされており、しかもファイル位置は公開されていません。ログを編集できるのは、
+dbeditという専用ツールだけらしいです。
+
+4. まとめ
+
+罠も色々ありますが、結局管理者がどこまで本気でやるかってことにかかってきます。し
+かし、罠をはってるような所は本気の所が多いようです。逆に罠もセキュも何もない所っ
+てのは、ハックされても文句は言えないんじゃないでしょうか。でも本気出さないとまず
+い場合もありますよ。企業だと特許に関連するようなデータ、大学・病院だと患者のカル
+テデータなどが入ってる鯖は極めて神経質です。自分の所に大事なデータが入っていると
+きは、気をつけてくださいね。
+

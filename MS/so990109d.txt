@@ -1,0 +1,157 @@
+/*
+ * Winを256倍楽しむ本（telnet編）
+ *
+ * 出張から帰ってきてこんなもの書いてちゃいかんのだが
+ * とりあえず、telnet編書いてみたけどどうでしょ。
+ *
+ */
+
+第６章  Telnet でつなげ！     その１
+(メーラーなんか、もういらない)
+
+其の一  メールを送る
+
+やはり最初はsmtpのお話でしょうか。でもこの方法は超有名でいくらでもころがってます
+ねぇ。そこで「お子様win 」としては非営利、非内輪、非偽善の精神、いや違った1)オリ
+ジナリティ、2)普通でない使い方、3)あまり役にたたないの３本柱を守りながら進めてい
+きたいと思います。
+
+その前にあなたがワタシに騙されてTeraTermを拾ってきたとしたら、Setup->General の
+LanguageをJapaneseにしておきましょう。ほら、ヘルプが日本語で出てきた。．．よく読
+んでおきましょう。
+
+あなたがプロバイダに加入した時貰った「これを設定しとけ」の中にメールサーバーとい
+うのがあったはずです。そしてメーラーのどこかに入っているはずです。たとえば、
+
+送信メール(SMTP)    smtp.mailhost.or.jp
+受信メール(POP3)    pop.mailhost.or.jp
+
+両方同じかも知れませんね。これを使います。( 別に悪いことする訳じゃないからね)Ter
+aTerm を起動したらダイアログが現れるのでHOSTにsmtp.mailhost.or.jp をTelnetのチェ
+ックは外しておいてTCPPORT を25に。あ、その前にSetup->Terminal でローカルエコーは
+ON、Newline はCR+LF にしておきましょう。とりあえず他はデフォルトのままでいいでし
+ょう。
+
+どうしてもwin95 付属のtelnetを使いたい人はコマンドラインで、
+telnetsmtp.mailhost.or.jp 25
+
+うまく繋がると何やら文字がでてきます。
+タイプミスに注意して、HELO と挨拶から始めます。
+
+Server:はだいたいこんな感じで返ってくるということです。
+> は、あなたが打ち込む部分。
+
+Server: 220 hogehoge.ne.jp Sendmail 8.6.12 Ready 996 18:21:24 +0900
+Server: 220 Spoken here
+> HELO gehogeho.com {CRLF}
+Server: 250 hogehoge.ne.jp Hello gehogeho.com[202.32.4.19]
+> MAIL FROM:<FBI@FBI.gov>		[まあ、適当に]
+Server: 250 OK
+RCPT TO:<man@target.com>		[ここに受け取り人]
+Server: 250 OK
+> DATA {CRLF}
+Server: 354 Start mail input; end with {CRLF}.{CRLF}
+( This is intentional blank ) ********** [A]
+> Date: 3 Jun 97 22:45:41 <CRLF>
+> FROM: <shineshine@kiraida@com> <CRLF>	[デタラメかアナタの嫌いな奴]
+> Subject: I HATE YOU <CRLF>
+> To: Aho@hehe.or.jp  <CRLF>		[ここは適当に]
+>
+> (本文)
+>  You're so stupid, when the weather man said it was chilly, 
+> you grabbed a spoon!   <CRLF>
+>  Yo momma so fat she was mistaken for God's bowling ball!  <CRLF>
+>  HAHAHAHAHA!!!!!!!!!!!!!!   <CRLF>
+> .<CRLF>				[最後は .ピリオドで終わる]
+Server:250 OK
+> QUIT					[QUITで終了]
+Connection closed by foreign host.
+
+
+これで悪口メールは相手に送られる。もし途中で間違いに気づいたらRSETと打ち込み、MA
+IL FROM:からやり直しましょう。
+なぜ、RCPTTO: とDATAの後のTo: を変えたか？相手のメーラーに表示されるのはDATAの後
+にあるTo: だからだ。もし、バレたとしても、
+
+「俺は Aho@hehe.or.jpに送ったんだ！」
+
+と言い訳できる、といいが....相手がアホなら効果はある。
+
+さて、まだ********[A] の空白部分を説明していない。お子様win が受け取り人を誤魔化
+すだけだと思ったら大間違いである。[A] に入れるべき文字列はこれ。
+
+Received: (from hogera@localhost) by cdt-list.cdt.org (8.6.12/8.6.9)
+          id PAA00124; Thu, 3 Jul 1997 10:34:04 -0400
+
+もちろん適当に書いちゃいましょう。あまり変な時間にしないように。前に出てきた「発
+信元を偽る」というやつでした。さあ、これでイタズラを楽しんでくれ。
+
+最後に、送った結果についてはすべてあなたの責任です。怒られても私が警告しなかった
+とは言わないように。
+
+RFC821
+=======================================
+
+其の二  メールを読む
+
+今度はメールを読んでみましょう。同じ要領であなたのＰＯＰサーバーに繋ぎます。ポー
+トは（たぶん）110 。
+
+おっと、その前に実験用のメールを自分宛てに出しておきましょう。たぶんこんな感じに
+なるでしょう。
+
+
+> が入力する部分。
+
++OK QPOP (version 2.3) at postoffice starting.
+> user hogehoge  <CRLF>			[自分のアカウント名を]
++OK password required for hogehoge
+> pass ******** <CRLF>			[パスワード]
++OK maildrop has 1 message (567 octets)	[メールが１通来てました]
+> list <CRLF>				[Listを表示させる]
++OK 1 message (567 octets)
+1 567
+.
+> retr 1 <CRLF>				[ 1番を読む ]
++OK 567 octets
+
+Received: by hogehoge.com; id M1203445; Wed, 16 Jul 1997 15:08:55 +0900 (JST)
+Received: from vicePresident.WhiteHouse.gov by undergroundnet.com
+          (8.8.5+2.7Wbeta5/3.6Wbeta4-03/22/96)
+          id M1210690; Wed, 16 Jul 1997 15:08:52 +0900
+					[ おお、ホワイトハウスの副大統領から^^;
+					  (レジストリ編参照) ]
+
+Message-Id: <199707153708.MAA25490@undergroundnet.com>
+
+From: "Nobody" 
+To: 
+Subject: telnet test
+Date: Wed, 16 Jul 1997 15:04:37 +0900
+X-MSMail-Priority: Normal
+X-Priority: 3
+X-Mailer: Microsoft Internet Mail 4.70.1157
+
+testing..				[ここから本文]
+漢字テスト                               ↓
+日本語も使えるようです。
+end..					[本文ここまで]
+.
+
+> quit <CRLF>				[QUITで終了]
++OK POP server signing off (1 message, 567 octets left)
+
+
+どうです。Telnetだけでメールのやりとりが出来てしまいました。さあ、重たいメールソ
+フトなんか消してしまいましょう。
+
+=======================================
+
+「いちいちこんな事してメールを読むのは大変だ」と思っていませんか？アタッチがあっ
+たらどうするんだ？そうです。その通りです。
+「ヘッダをいじれるメーラーがあれば、telnetでやることないんじゃない？」そう言えば
+”telnetなんかでやるとRSETのお世話になるのが関の山”と言ったのは私でした。まった
+くその通りです。^^;
+
+なお、このやりかたはWin95/NT以外ではできません。:-p　DOS/V　マシンを持っていない
+人は早く買ってきましょう。

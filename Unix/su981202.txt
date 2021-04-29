@@ -1,0 +1,124 @@
+JPNICへのHackingについて
+
+■After Hack Jpnic Info
+
+さて、私からの勧告メールによりJPNICはwhois-gate service 中断という、ユーザーを犠
+牲にするが一番安全な方法で侵入を防ぐ事にしたようです。今はまだサービス停止中であ
+りますが、よりよいPerlコードを書いているのだろうと思います。それからJPNIC 側の決
+断であるとはいえ、結果的に同サービスを停止するに至ったわけであり、ユーザーには多
+大な迷惑をかけた事をグループ代表として、ここに謝罪いたします。申し訳ありませんで
+した。
+
+つまり、以下に記載してある方法では現在のJPNIC には通用いたしません。このような方
+法もあるという認識としてご覧ください。JPNICからのアナウンスはこちら。
+
+■JPNICとは？
+
+社団法人日本ネットワークインフォメーションセンターの略称で、コンピュータネットワ
+ークを円滑に運営するために必要となる各種の登録管理業務および情報提供業務を行って
+いる。単純に言えば、ＩＰアドレスとドメイン名の管理をしているところだ。詳しくはこ
+こで参照する事。
+
+■How to hack JPNIC
+
+JPNICをHackしよう。どうすればよいだろうか？JPNICでは、whois-gateというservice を
+行っているのでこれを利用してやろう。whois-gateは、whois の情報を条件により検索す
+る事が出来るが、これを行っているのがnew-whois-gate.plというprogramだ。もし、evil
+.co.jpを検索したければ、httpdにGET /cgi-bin/new-whois-gate.pl?evil.co.jpとreques
+tすればよい。これでwhoisの情報が画面に表示される。
+
+DownLoad : new-whois-gate.pl_( 6630 Bytes )
+
+このソースの８～９行目と、２３～２８行目を見てほしい。
+
+8: $whois_command = '/usr/ucb/whois';
+9: $jpnic = 'whois.nic.ad.jp';
+23: if (@ARGV != '') {
+24: print "Your query was whois -h $jpnic \"@ARGV\" \n";
+25: print "\&ltPRE\>\n";
+26: open(WHOIS, "$whois_command -h $jpnic \"@ARGV|");
+27: &ampproc_whois;
+28: }
+
+８行目は$whois_commandという変数に/usr/ucb/whoisという文字列を代入している。つま
+り、これが www.nic.ad.jp上で起動されるProgramだ。９行目は whois command の引数で、
+どのwhois serverで検索するのかを指定している。日本の場合は当然whois.nic.ad.jp と
+なる。２３～２８行目で平たく言えばcommandを実行している。ここがこのprogramの核と
+なる部分なのだが、２６行目に注目してほしい。引数をダブルクォーテーション((文字列
+引数なので、当然ダブルクォーテーションはエスケープされている)で囲っているのがわか
+るだろうか？引数はこの様な形式で渡されている。
+さて、UNIX shellでは、command を連続で動作させたい場合にセミコロンを使うという事
+を知っているだろうか。例えば、$ ls -lga;ls -lgaこう入力すると、ls -lgaが二回((バ
+ッチ形式で)実行される。一行で別のcommandをさせる事が可能なのだ。では、このnew-wh
+ois-gate.plではどうだろうか？このprogramでは当然whoisプログラムが立ち上がり、Web
+上で指定した引数をwhois の引数として実行する仕様となっている。では、引数にセミコ
+ロン(0x3b)をつけて実行されるとどうなるか？つまり以下の様なrequest を要求してみる
+わけだ。
+
+http://www.nic.ad.jp/cgi-bin/new-whois-gate.pl?%3bw
+
+No matchとなった。何故だろうか？？
+それは、program でダブルクォーテーションをつけている為にセミコロンでさえも引数の
+文字列と捉えられてしまったからだろう。ではこれを回避するにはどうすればよいか？実
+に簡単だ。以下の様にrequestを送れば良い。
+
+http://www.nic.ad.jp/cgi-bin/new-whois-gate.pl?%22%3bw
+
+成功した！！見事にwww.nic.ad.jp上でw commandを実行した状態がＷｅｂ上に表示された
+のがおわかり頂けただろうか。これはダブルクォーテーション(0x22)により、文字列を強
+制的に寸断させているからだ。これによりダブルクォーテーション以下の文字列をセミコ
+ロンで区切る事により普通のUNIX Commandとしてwww.nic.ad.jp 上で実行させる事ができ
+てしまう。
+
+Web上のProgrammingは、そのprogramをそのserverで動かす為にこの様な重要なBugを抱え
+てしまう事がたびたびある。phf 等はインストール後に削除してしまえばよいが、この様
+なProgramはUser によって度々UpLoadされる事がある。この為、AccountがないH/Cracker
+によって重要なファイルを見られたりするのだ。
+また、聡明なものならばWeb上からroot権限を取ってしまう事だってあるのだ。
+
+www.nic.ad.jpには良い参考例としてTargetにさせて頂いた。ここで、www.nic.ad.jpのSe
+curityを見てみよう。
+
+passwdを覗く(cat /etc/passwd)。当然出来る。
+passwdを除く(rm /etc/passwd)。当然出来ない。シャレだ(笑)
+hostsを覗く(cat /etc/hosts)。これも出来る。
+
+このprogram の所有者を見てみる。このprogramの所有者はotherというGroup IDである事
+がわかる。User Directoryを見てみる懸命な事に、Other GIDがDirectoryへ書き込みする
+事を許可していなかった。これによってH /Crackerが、以下の様なコマンドを打つのを避
+ける事が出来ている。
+
+echo "+ +" > /user_home_directory/.rhosts
+
+もしこれが可能になれば、そのAccount は世界中に公開された事になる。これが使えれれ
+ば、あとは、rlogin www.nic.ad.jp -l yokoとすればそののAccountでwww.nic.ad.jpにLo
+ginする事が出来たのだが。
+
+一通り見終わった。どうやら Crackerでは彼のアカウントに侵入するのは難しそうだ（お
+っとjoe accountを捜すのを忘れていたが、pwck programがinstallされている為、存在す
+るはずないので省く）。
+だが、世の中そんなに甘くはない。ここはanonymous ftpを許可しているのでFileのUpLoa
+dはできるわけだ。もちろんWeb上からその操作を行う事も出来る。では、root権限を取る
+事の出来るProgramをUpLoadし、ｗｅｂ上でpermissonを変更し、実行するとどういう結果
+がでるだろうか？？？答えは簡単だ。root shellに代表されるツールを実行してもroot権
+限を取る事は出来ない。無理だ。
+※我々はWeb上からwww.nic.ad.jpのroot権限を奪う事が出来だ。いずれそういった類のツ
+ールが出回るのかも知れないが。。。
+
+www.nic.ad.jpは全てを見通す事の出来ない奴が作ったprogramによりSecurity Levelが久
+しく下がることとなった。彼らは一つのprogramがserver 全体を危機にさらす事を知るべ
+きである。彼らには既にここに書いたのと同じ様なレポートをメールで送ってある。いず
+れ対処される事になるだろう。見事hackされてインターネットが混乱するのだけは避けて
+ほしいし、重要なカギを握る nic.ad.jpにはしっかりしていてほしいものだと１ハッカー
+として強く願いたい。
+
+■その他のAdvice
+
+この他にもこの様なBug を抱えたBomb Programが数多く存在している。経験上から言えば大
+学に多い。東大や慶応大にもあったはずだ。偏差値は高いのに、残念ながら周りを見渡すsk
+illはないようだ。
+お勧めするわけではないが、この様なBomb Programを捜すにはＷｅｂ検索が使える。InfoSe
+ekでは、Title:fingerや、Title:nslookupなどで検索すると見つかるだろう。nslookupの場
+合、多くはダブルクォーテーションなしでセミコロンで区切るだけで好きなCommand を実行
+できる事が多いということを付け加えておこう。
+

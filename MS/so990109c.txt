@@ -1,0 +1,125 @@
+/*
+ * Winを256倍楽しむ本（ＰＧＰ編）
+ *
+ * ４章が抜けてますが、きっと探せばあるでしょう
+ *
+ */
+
+第５章  とりあえずＰＧＰくらいは..  その３
+(電子署名とは？)
+
+何かわからないけど、CERTの文章の最後にはいかにも意味ありげな署名がある。たとえば
+、こんなのがくっついている。
+
+-----BEGIN PGP SIGNATURE-----
+Version: 2.6.3i
+Charset: noconv
+
+iQCVAwUBM8LKZNEPFkgjwmntAQF2lgP+LN44UNletoNV45JIsPSVs5d9oXIhG1Jo
+Sf47Rh5HJPosJwLYXZu0UH93Qq4xfCQU03IxMqk6KAor0NU9ARXSE9jqWkQV2OVr
+mn4XP4EWrB8uUZxZNUt8BQaA3fglcmD5y6CNFwZqgbQATBHgnQd+Zj/RgXCuXfP0
+fcFTuNBLZ+s=
+=1yAc
+
+-----END PGP SIGNATURE-----
+
+何となくやってみたいがＰＧＰを使うと全部読めなくなってしまう。「かっこいいので、
+やってみたい！」って言ってもあなた。ＰＧＰの基本的な使い方は前回教えたでしょ。そ
+れに電子署名って普通はあまり意味がありまへんがな。でもまあ、クリア電子署名を説明
+してみましょう。
+
+クリア署名は「本文は暗号化しなくてもよいけど、書き換えられるのはイヤだ」「自分で
+出したことを証明したい」というときに使います。たとえばアナタの恋敵が彼女に偽メー
+ルをだしている。このままじゃ嫌われるので、自分のものは証明したい。あるいは会社の
+ＬＡＮで秘書課の京子ちゃんにメールをだしているが、途中で恋敵のadmin が変更してい
+るようだ、といったときに使います。
+
+でもアナタの邪魔をする奴は放っておきなさい。いずれ馬に蹴られて死んでしまいます。
+それに秘書課の京子ちゃんが本当にアナタを好きなら、
+「ねぇ、こんなメールが来たけどアナタじゃないわよね。イタズラよね」
+(もし本当に出していても)「そうだよ」
+「そうよね。アナタがこんなメールくれるとは思わないもの」
+
+....これで終わりである....
+
+そもそも、キミは京子ちゃんにも信用されていないようだし、それに、... やめておこう
+....今度は私が馬に蹴られてしまう。
+
+ではクリア電子署名を説明しましょう。
+
+適当なファイルでやってみましょう。
+
+C:\pgp> type 123
+This is test file.
+漢字テストもします。
+
+これにクリア電子署名します。ASCII 形式のクリア署名のオプションは-sta署名するＩＤ
+は-uで指定します。
+
+C:\pgp> pgp -sta 123 -uhogehoge (ファイル123にhogehogeが署名)
+
+Pretty Good Privacy(tm) 2.6.3i - Public-key encryption for the masses.
+(c) 1990-96 Philip Zimmermann, Phil's Pretty Good Software. 1996-01-18
+International version - not for use in the USA. Does not use RSAREF.
+Current time: 1997/07/08 23:20 GMT
+
+A secret key is required to make a signature.
+You need a pass phrase to unlock your RSA secret key.
+Key for user ID: hogehoge 
+1024-bit key, key ID 23C269ED, created 1997/07/08
+
+Enter pass phrase: Pass phrase is good.  Just a moment....
+Clear signature file: 123.asc
+
+これで hogehogeが電子署名したクリアファイルができました。
+中身を表示させてみます。
+
+C:\pgp> type 123.asc
+
+-----BEGIN PGP SIGNED MESSAGE-----
+This is test file.
+漢字テストもします。
+
+-----BEGIN PGP SIGNATURE-----
+Version: 2.6.3i
+Charset: noconv
+
+iQCVAwUBM8LKZNEPFkgjwmntAQF2lgP+LN44UNletoNV45JIsPSVs5d9oXIhG1Jo
+Sf47Rh5HJPosJwLYXZu0UH93Qq4xfCQU03IxMqk6KAor0NU9ARXSE9jqWkQV2OVr
+mn4XP4EWrB8uUZxZNUt8BQaA3fglcmD5y6CNFwZqgbQATBHgnQd+Zj/RgXCuXfP0
+fcFTuNBLZ+s=
+=1yAc
+-----END PGP SIGNATURE-----
+
+この署名を確かめるには
+C:\> pgp 123.asc [Return]
+これでもとの123と同じファイルができます。
+
+===========================
+
+では試しにこの123.ascをちょっと変えてみましょう。
+
+-----BEGIN PGP SIGNED MESSAGE-----
+This is test file.
+漢字テストもします。
+おまえなんか嫌いだ。    ＜ ------  追加
+
+-----BEGIN PGP SIGNATURE-----
+Version: 2.6.3i
+(以下略)
+-----END PGP SIGNATURE-----
+
+では同じように
+
+C:\pgp> pgp 123.asc
+
+(数行のメッセージ)
+File has signature.  Public key is required to check signature.
+
+WARNING: Bad signature, doesn't match file contents!       ＜＜**** 注目
+Bad signature from user "hogehoge ".  ＜＜**** 注目
+Signature made 1997/07/08 23:20 GMT using 1024-bit key, key ID 23C269ED
+
+見事に改竄が見破られました。
+=========================================
+

