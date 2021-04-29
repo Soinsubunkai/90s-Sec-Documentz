@@ -27,13 +27,13 @@
 |------|-----|-----|
 |1998/12/01|[brKill](https://github.com/sanatamura/90s-Sec-Documentz/blob/main/MS/so981201.txt)|Windows95/NTの新しいバグに関しての説明とソース|
 |1998/12/08|[Nuke](https://github.com/sanatamura/90s-Sec-Documentz/blob/main/MS/so981208.txt)|Windows95/NTのバグを使って他人のマシンのネットワーク機能を麻痺させる方法|
-|1998/12/18|[システム攻撃・防御より.1](https://github.com/sanatamura/90s-Sec-Documentz/blob/main/MS/so981218.txt)|
+|1998/12/18|[システム攻撃・防御より.2](https://github.com/sanatamura/90s-Sec-Documentz/blob/main/MS/so981218.txt)|
 |1998/12/18|[システム攻撃・防御より.2](https://github.com/sanatamura/90s-Sec-Documentz/blob/main/MS/so981218a.txt)|
-|1999/01/09|[お子様Windows](https://github.com/sanatamura/90s-Sec-Documentz/blob/main/MS/so990109.txt)|ワンランク上をゆく匿名メールの出し方|
-|1999/01/09 |[お子様Windows](https://github.com/sanatamura/90s-Sec-Documentz/blob/main/MS/so990109a.txt) |間違いだらけの道具の選び方 '97|
-|1999/01/09|[お子様Windows](https://github.com/sanatamura/90s-Sec-Documentz/blob/main/MS/so990109b.txt) |ＩＲＣをつかいこなせ！|
-|1999/01/09 |[お子様Windows](https://github.com/sanatamura/90s-Sec-Documentz/blob/main/MS/so990109c.txt) |とりあえずＰＧＰくらいは..|
-|1999/01/09 |[お子様Windows](https://github.com/sanatamura/90s-Sec-Documentz/blob/main/MS/so990109d.txt)|Telnet でつなげ！|
-|1999/01/09 |[お子様Windows](https://github.com/sanatamura/90s-Sec-Documentz/blob/main/MS/so990109e.txt) |Win の不思議なファイルたち|
+|1999/01/09|[お子様Windows](https://github.com/sanatamura/90s-Sec-Documentz/blob/main/MS/so990109.txt)|匿名メールの出し方|
+|1999/01/09 |[お子様Windows](https://github.com/sanatamura/90s-Sec-Documentz/blob/main/MS/so990109a.txt) |道具の選び方|
+|1999/01/09|[お子様Windows](https://github.com/sanatamura/90s-Sec-Documentz/blob/main/MS/so990109b.txt) |IRCについて|
+|1999/01/09 |[お子様Windows](https://github.com/sanatamura/90s-Sec-Documentz/blob/main/MS/so990109c.txt) |PGPについて|
+|1999/01/09 |[お子様Windows](https://github.com/sanatamura/90s-Sec-Documentz/blob/main/MS/so990109d.txt)|Telnetでつなげ！|
+|1999/01/09 |[お子様Windows](https://github.com/sanatamura/90s-Sec-Documentz/blob/main/MS/so990109e.txt) |Winの不思議なファイルたち|
 |1999/01/09 |[お子様Windows](https://github.com/sanatamura/90s-Sec-Documentz/blob/main/MS/so990109f.txt) |格言いろいろ|
 
