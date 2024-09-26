@@ -15,9 +15,9 @@
 | 1998/12/26 | [システム攻撃・防御より](https://github.com/Soinsubunkai/90s-Sec-Documentz/blob/main/Unix/su981226.txt) | UNIXでダイヤルアップしている人にルートで進入 |
 | 1999/01/09 | [suトロイでrootになる](https://github.com/Soinsubunkai/90s-Sec-Documentz/blob/main/Unix/su990109.txt) | あらかじめアカウントが必要な模様 |
 | 1999/01/23 | [トラッシング](https://github.com/Soinsubunkai/90s-Sec-Documentz/blob/main/Unix/su990123.txt) | いわゆるゴミ漁り |
-| 1999/02/22 | [psの細工法](https://github.com/Soinsubunkai/90s-Sec-Documentz/blob/main/Unix/Unix/su990222.txt) | psを細工してtdm、snifferを隠す方法 |
-| 1999/02/22 | [スタックオーバー](https://github.com/Soinsubunkai/90s-Sec-Documentz/blob/main/Unix/Unix/su990222a.txt) | スタックオーバーフローを利用した攻撃 |
-| 1999/03/24 | [ログの解体と消去法](https://github.com/Soinsubunkai/90s-Sec-Documentz/blob/main/Unix/Unix/su990324.txt)| どこまで効果があるのかは不明 |
+| 1999/02/22 | [psの細工法](https://github.com/Soinsubunkai/90s-Sec-Documentz/blob/main/Unix/su990222.txt) | psを細工してtdm、snifferを隠す方法 |
+| 1999/02/22 | [スタックオーバー](https://github.com/Soinsubunkai/90s-Sec-Documentz/blob/main/Unix/su990222a.txt) | スタックオーバーフローを利用した攻撃 |
+| 1999/03/24 | [ログの解体と消去法](https://github.com/Soinsubunkai/90s-Sec-Documentz/blob/main/Unix/su990324.txt)| どこまで効果があるのかは不明 |
 
 
 
